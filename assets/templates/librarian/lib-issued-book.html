@@ -1,0 +1,273 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <!-- Required meta tags --> 
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Librarian Account</title>
+    <!-- base:css -->
+    <link rel="stylesheet" href="{% static 'librarian/vendors/mdi/css/materialdesignicons.min.css' %}">
+    <link rel="stylesheet" href="{% static 'librarian/vendors/feather/feather.css' %}">
+    <link rel="stylesheet" href="{% static 'librarian/vendors/base/vendor.bundle.base.css' %}">
+    <!-- endinject -->
+    <!-- plugin css for this page -->
+    <link rel="stylesheet" href="{% static 'librarian/vendors/flag-icon-css/css/flag-icon.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'librarian/vendors/font-awesome/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'librarian/vendors/jquery-bar-rating/fontawesome-stars-o.css' %}">
+    <link rel="stylesheet" href="{% static 'librarian/vendors/jquery-bar-rating/fontawesome-stars.css' %}">
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <link rel="stylesheet" href="{% static 'librarian/css/style.css' %}">
+    <!-- endinject -->
+    <link rel="shortcut icon" href="{% static 'librarian/images/favicon.png' %}" />
+  </head>
+
+<body>
+  <div class="container-scroller">
+    <!-- partial:partials/_navbar.html -->
+    <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+      <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+        <a class="navbar-brand brand-logo" style="color: white; background-image: white;" href="{% url 'lib-home' %}"> 
+          <img src="{% static 'librarian/images/icons8-library-building-50.png' %}" style="width: 40px; height: 40px; margin-right: 2px; color: white;">LIBRARY</a>        
+        <a class="navbar-brand brand-logo-mini" href="{% url 'lib-home' %}">
+          <img src="{% static 'librarian/images/logo-mini.svg' %}" alt="logo"/></a>
+      </div>
+      <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
+        <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+          <span class="icon-menu"></span>
+        </button>
+        <ul class="navbar-nav mr-lg-2">
+          <li class="nav-item nav-search d-none d-lg-block">
+            <!-- <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="search">
+                  <i class="icon-search"></i>
+                </span>
+              </div>
+              <input type="text" class="form-control" placeholder="Search Projects.." aria-label="search" aria-describedby="search">
+            </div> -->
+          </li>
+        </ul>
+        <ul class="navbar-nav navbar-nav-right">
+          
+          <li class="nav-item dropdown d-flex mr-4 ">
+              <a class="nav-link count-indicator dropdown-toggle d-flex align-items-center justify-content-center"
+                  id="notificationDropdown" href="#" data-toggle="dropdown">
+                  <i class="icon-cog"></i>
+              </a>
+              <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
+                  aria-labelledby="notificationDropdown">
+                  <p class="mb-0 font-weight-normal float-left dropdown-header">Settings</p>
+                  <a class="dropdown-item preview-item" href="{% url 'lib-profile' %}">
+                    <i class="icon-head"></i> Profile
+                </a>
+                  <a class="dropdown-item preview-item" href="{% url 'main-librarian-login' %}">
+                      <i class="icon-inbox"></i> Logout
+                  </a>
+              </div>
+          </li>
+          
+      </ul>
+        <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+          <span class="icon-menu"></span>
+        </button>
+      </div>
+    </nav>
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+      <!-- partial:partials/_sidebar.html -->
+      <nav class="sidebar sidebar-offcanvas" id="sidebar">
+        {% for i in profile %}
+      <div class="user-profile">
+        <div class="user-image">
+          <img src="/media/{{i.librarian_photo}}">
+        </div>
+        {% endfor %}
+        <div class="user-name">
+          Librarian
+        </div>
+        <!-- <div class="user-designation">
+            Developer
+        </div> -->
+      </div>
+      <ul class="nav">
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'lib-home' %}">
+            <i class="icon-box menu-icon"></i>
+            <span class="menu-title">Home</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+            <i class="icon-book menu-icon"></i>
+            <span class="menu-title">Book Management</span>
+            <i class="menu-arrow"></i>
+          </a>
+          <div class="collapse" id="ui-basic">
+            <ul class="nav flex-column sub-menu">
+              <li class="nav-item"> <a class="nav-link" href="{% url 'lib-add-book' %}">Add Books</a></li>
+              <li class="nav-item"> <a class="nav-link" href="{% url 'lib-search' %}">Search Panel</a></li>
+              <li class="nav-item"> <a class="nav-link" href="{% url 'lib-issue-book' %}">Request Panel</a></li>
+              <li class="nav-item"> <a class="nav-link" href="{% url 'lib-return-book' %}">Issue Panel</a></li>
+
+
+              <!-- <li class="nav-item"> <a class="nav-link" href="{% url 'lib-issued-book' %}">View Issued & Returned 
+                  Books</a></li>-->
+
+            </ul>
+          </div>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'lib-sentiment' %}">
+            <i class="icon-help menu-icon"></i>
+            <span class="menu-title">Sentiment Analysis</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'lib-feedback' %}">
+            <i class="icon-air-play menu-icon"></i>
+            <span class="menu-title">FeedBack</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+      <!-- partial -->
+      <div class="main-panel">
+        <div class="content-wrapper">
+          <div class="row">
+            <div class="col-sm-12 mb-4 mb-xl-0">
+              <h4 class="font-weight-bold text-dark text-center">View Issued Books & Return Status</h4><br>
+
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-lg-12 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <table class="table table-hover">
+                      <thead>
+                        <tr class="font-weight-bold text-dark">
+                          <th>BOOK PROFILE</th>
+                          <th>BOOK <br>
+                            TITLE</th>
+                          <th>STD ID</th>
+                          <th>STD NAME</th>
+                          <th>CAMPUS NAME</th>
+                          <th>BLOCK NAME</th>
+                          <th>AUTHOR NAME</th>
+                          <th>ISSUE DATE</th>
+                          <th>ISSUE ACTION</th>
+                          <th>RETURN DATE</th>
+                          <th>RETURN STATUS</th>
+                          <th>SUBMIT</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td class="py-1">
+                            <img src="{% static 'librarian/images/dwaring.webp' %}" alt="image" />
+                          </td>
+                          <th>Engineering Drawing</th>
+                          <td>CSE0901</td>
+                          <td>Sanjay</td>
+                          <td>SMEC</td>
+                          <td>A Block</td>
+                          <td>B.S. Grewal</td>
+                          <td>02/aug/22</td>
+                          <td><label class="badge badge-primary">Issued</label></td>
+                          <td>02/sep/22</td>
+                          <td><label class="badge badge-success">Returned</label></td>
+                          <td><input type="submit" class="btn-xs btn-info" style="border-radius: 4px;" value="Submit"></td>
+                        </tr>
+                        <tr>
+                          <td class="py-1">
+                            <img src="{% static 'librarian/images/Electrical Circuit Analysis.jpg' %}" alt="image" />
+                          </td>
+                          <th>Electrical Circuit Analysis</th>
+                          <td>ECE2301</td>
+                          <td>Haritha</td>
+                          <td>SMCET</td>
+                          <td>C Block</td>
+                          <td>David Johnson</td>
+                          <td>22/dec/21</td>
+                          <td><label class="badge badge-primary">Issued</label></td>
+                          <td>22/jan/22</td>
+                          <td><label class="badge badge-warning">In Progress</label></td>
+                          <td><input type="submit" class="btn-xs btn-info" style="border-radius: 4px;" value="Submit"></td>
+
+                        </tr>
+                        <tr>
+                          <td class="py-1">
+                            <img src="{% static 'librarian/images/Fluid Mechanics and Hydraulic Machines.webp' %}" alt="image" />
+                          </td>
+                          <th>Fluid Mechanics and Hydraulic Machines</th>
+                          <td>MECH1701</td>
+                          <td>Akhil</td>
+                          <td>SMIC</td>
+                          <td>A Block</td>
+                          <td>R.K Bansal</td>
+                          <td>25/may/22</td>
+                          <td><label class="badge badge-primary">Issued</label></td>
+                          <td>25/june/22</td>
+                          <td><label class="badge badge-warning">In Progress</label></td>
+                          <td><input type="submit" class="btn-xs btn-info" style="border-radius: 4px;" value="Submit"></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- <div class="col-xl-3 grid-margin-lg-0 grid-margin stretch-card">
+                      
+                    </div> -->
+          </div>
+        </div>
+        <!-- content-wrapper ends -->
+        <!-- partial:partials/_footer.html -->
+        <footer class="footer">
+          <div class="d-sm-flex justify-content-center justify-content-sm-between">
+            <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © Web Based College
+              Library Management System
+              2020</span>
+            
+          </div>
+          <span class="text-muted d-block text-center text-sm-left d-sm-inline-block mt-2">Designed By <a
+              href="https://codebook.in/" target="_blank">CodeBook.in</a></span>
+        </footer>
+
+        <!-- partial -->
+      </div>
+      <!-- content-wrapper ends -->
+    </div>
+    <!-- main-panel ends -->
+  </div>
+  <!-- page-body-wrapper ends -->
+  </div>
+  <!-- container-scroller -->
+
+  <!-- base:js -->
+  <script src="{% static 'librarian/vendors/base/vendor.bundle.base.js' %} "></script>
+  <!-- endinject -->
+  <!-- Plugin js for this page-->
+  <!-- End plugin js for this page-->
+  <!-- inject:js -->
+  <script src="{% static 'librarian/js/off-canvas.js' %} "></script>
+  <script src="{% static 'librarian/js/hoverable-collapse.js' %} "></script>
+  <script src="{% static 'librarian/js/template.js' %} "></script>
+  <!-- endinject -->
+  <!-- plugin js for this page -->
+  <script src="{% static 'librarian/vendors/chart.js/Chart.min.js' %} "></script>
+  <script src="{% static 'librarian/vendors/jquery-bar-rating/jquery.barrating.min.js' %} "></script>
+  <!-- End plugin js for this page -->
+  <!-- Custom js for this page-->
+  <script src="{% static 'librarian/js/dashboard.js' %} "></script>
+  <!-- End custom js for this page-->
+</body>
+
+</html>

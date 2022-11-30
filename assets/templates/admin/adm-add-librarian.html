@@ -1,0 +1,421 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Admin Account</title>
+  <!-- base:css -->
+  <link rel="stylesheet" href="{% static 'admin/vendors/mdi/css/materialdesignicons.min.css' %} ">
+  <link rel="stylesheet" href="{% static 'admin/vendors/feather/feather.css' %} ">
+  <link rel="stylesheet" href="{% static 'admin/vendors/base/vendor.bundle.base.css' %} ">
+  <!-- endinject -->
+  <!-- plugin css for this page -->
+  <link rel="stylesheet" href="{% static 'admin/vendors/flag-icon-css/css/flag-icon.min.css' %} " />
+  <link rel="stylesheet" href="{% static 'admin/vendors/font-awesome/css/font-awesome.min.css' %} ">
+  <link rel="stylesheet" href="{% static 'admin/vendors/jquery-bar-rating/fontawesome-stars-o.css' %} ">
+  <link rel="stylesheet" href="{% static 'admin/vendors/jquery-bar-rating/fontawesome-stars.css' %} ">
+  <!-- End plugin css for this page -->
+  <!-- inject:css -->
+  <link rel="stylesheet" href="{% static 'admin/css/style.css' %} ">
+  <!-- endinject -->
+  <link rel="shortcut icon" href="{% static 'admin/images/favicon.png' %} " />
+
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+</head>
+
+<body>
+  <div class="container-scroller">
+    <!-- partial:partials/_navbar.html -->
+    <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+      <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+        <a class="navbar-brand brand-logo" style="color: white; background-image: white;"
+          href="{% url 'adm-dashboard' %}">
+          <img src="{% static 'admin/images/icons8-library-building-50.png' %}"
+            style="width: 40px; height: 40px; margin-right: 2px; color: white;">LIBRARY</a>
+        <a class="navbar-brand brand-logo-mini" href="{% url 'adm-add-librarian' %}">
+          <img src="{% static 'admin/images/logo-mini.svg' %}" alt="logo" /></a>
+      </div>
+      <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
+        <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+          <span class="icon-menu"></span>
+        </button>
+        <ul class="navbar-nav mr-lg-2">
+          <li class="nav-item nav-search d-none d-lg-block">
+            <!-- <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="search">
+                  <i class="icon-search"></i>
+                </span>
+              </div>
+              <input type="text" class="form-control" placeholder="Search Projects.." aria-label="search"
+                aria-describedby="search">
+            </div> -->
+          </li>
+        </ul>
+        <ul class="navbar-nav navbar-nav-right">
+          <li class="nav-item dropdown d-flex mr-4 ">
+            <a class="nav-link count-indicator dropdown-toggle d-flex align-items-center justify-content-center"
+              id="notificationDropdown" href="#" data-toggle="dropdown">
+              <i class="icon-cog"></i>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
+              aria-labelledby="notificationDropdown">
+              <p class="mb-0 font-weight-normal float-left dropdown-header">Settings</p>
+              <!-- <a class="dropdown-item preview-item">
+                <i class="icon-head"></i> Profile
+              </a> -->
+              <a class="dropdown-item preview-item" href="{% url 'main-admin-login' %}">
+                <i class="icon-inbox"></i> Logout
+              </a>
+            </div>
+          </li>
+        </ul>
+        <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
+          data-toggle="offcanvas">
+          <span class="icon-menu"></span>
+        </button>
+      </div>
+    </nav>
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+      <!-- partial:partials/_sidebar.html -->
+      <nav class="sidebar sidebar-offcanvas" id="sidebar">
+        <div class="user-profile">
+          <div class="user-image">
+            <img src="{% static 'admin/images/faces/face1.jpg' %}">
+          </div>
+          <div class="user-name">
+            Admin
+          </div>
+        </div>
+        <ul class="nav">
+          <!-- home start -->
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'adm-dashboard' %}">
+              <i class="icon-box menu-icon"></i>
+              <span class="menu-title">Home</span>
+            </a>
+          </li>
+          <!-- home end -->
+
+          <!-- librarian start -->
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+              <i class="icon-head menu-icon"></i>
+              <span class="menu-title">Library</span>
+              <i class="menu-arrow"></i>
+            </a>
+
+            <div class="collapse" id="ui-basic">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="{% url 'adm-add-librarian' %} ">Add Librarian</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{% url 'adm-manage-librarian' %} ">Management
+                    Librarian</a></li>
+              </ul>
+            </div>
+          </li>
+          <!-- librarian end -->
+
+          <!-- student start -->
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#std" aria-expanded="false" aria-controls="ui-basic">
+              <i class="icon-head menu-icon"></i>
+              <span class="menu-title">Student</span>
+              <i class="menu-arrow"></i>
+            </a>
+
+            <div class="collapse" id="std">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="{% url 'adm-manage-std' %}">Manage Student</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{% url 'adm-view-std' %}">View Students</a></li>
+
+              </ul>
+            </div>
+          </li>
+          <!-- student end -->
+
+          <!-- View start -->
+          <!-- <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
+              <i class="icon-book menu-icon"></i>
+              <span class="menu-title">View Books</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="auth">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="{% url 'adm-search-book' %}">Search Books</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{% url 'adm-view-std-rece-book' %}">View Std Received
+                    Books</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{% url 'adm-view-return' %}">View Std Returned Books</a>
+                </li>
+                <li class="nav-item"> <a class="nav-link" href="{% url 'adm-view-all-book' %}">View All Books</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{% url 'adm-manage-book' %}">Manage Books</a></li>
+              </ul>
+            </div>
+          </li> -->
+          <!-- View end -->
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'adm-sentiment' %}">
+                <i class="icon-help menu-icon"></i>
+                <span class="menu-title">Sentiment Analysis</span>
+            </a>
+        </li>
+          <!-- feedback start -->
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'adm-feedback' %}">
+              <i class="icon-air-play menu-icon"></i>
+              <span class="menu-title">feedback</span>
+            </a>
+          </li>
+          <!-- feedback end -->
+        </ul>
+      </nav>
+      <!-- partial -->
+      <div class="main-panel">
+        <div class="content-wrapper">
+          <div class="row">
+            <div class="col-sm-12 mb-4 mb-xl-0">
+              <h4 class="font-weight-bold text-dark text-center">Add Librarian</h4> <br><br>
+            </div>
+          </div>
+          <div class="row justify-content-center">
+            <div class="col-2"></div>
+            <div class="col-xl-8 grid-margin-lg-0 grid-margin  stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <form class="forms-sample" method="post" onsubmit='return loginvalidation();' name='myform' enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="row">
+                      <div class="col-6">
+                        <div class="form-group text-dark">
+                          <label for="exampleInputUsername1">Name</label>
+                          <input type="text" class="form-control" style="font-weight: bolder;" id="exampleInputUsername1" placeholder="Name"
+                            name="name">
+                        </div>
+                      </div>
+                      <div class="col-6">
+                        <div class="form-group text-dark">
+                          <label for="exampleInputUsername1">Phone No</label>
+                          <input type="tel" class="form-control" style="font-weight: bolder;" id="tel" placeholder="Phone No" name="phonenumber">
+                        </div>
+                      </div>
+                      <div class="col-6">
+                        <div class="form-group text-dark">
+                          <label for="exampleInputUsername1">Campus Name</label>
+                          <input type="text" class="form-control" style="font-weight: bolder;" id="exampleInputUsername1" placeholder="Campus Name"
+                            name="campusname">
+                        </div>
+                      </div>
+                      <div class="col-6">
+                        <div class="form-group text-dark">
+                          <label for="exampleInputUsername1">Block Name</label>
+                          <input type="text" class="form-control" style="font-weight: bolder;" id="text" placeholder="Block Name" name="blockname">
+                        </div>
+                      </div>
+
+                      <div class="col-6">
+                        <div class="form-group text-dark">
+                          <label for="exampleInputEmail1">Email address</label>
+                          <input type="email" class="form-control" style="font-weight: bolder;" id="exampleInputEmail1" placeholder="Email"
+                            name="email">
+                        </div>
+                      </div>
+                      <div class="col-6">
+                        <div class="form-group text-dark">
+                          <label for="exampleInputPassword1">Password</label>
+                            <input type="password" class="form-control" style="font-weight: bolder;" placeholder="Password" id="myInput" name="password">
+                          <!-- <input type="checkbox" onclick="myFunction()" class="mt-1 mb-0 mr-2">Show Password -->
+                        </div>
+                      </div>
+                      <div class="col-12">
+                        <div class="form-group text-dark">
+                          <label for="exampleInputPassword1">Upload Photo</label>
+                          <input type="file" class="form-control" name="photo" style="font-weight: bolder;" >
+                        </div>
+                      </div>
+                    </div>
+                    <center>
+                      <button type="submit" class="text-white btn btn-primary font-weight-bold">Add Librarian</button>
+                    </center>
+                    <!-- <button class="btn btn-light">Cancel</button> -->
+                  </form>
+                </div>
+              </div>
+            </div>
+            <div class="col-2"></div>
+          </div>
+        </div>
+
+        
+
+
+
+        <!-- content-wrapper ends -->
+        <!-- partial:partials/_footer.html -->
+        <footer class="footer">
+          <div class="d-sm-flex justify-content-center justify-content-sm-between">
+            <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © Web Based College
+              Library Management System
+              2020</span>
+          </div>
+          <span class="text-muted d-block text-center text-sm-left d-sm-inline-block mt-2">Designed By <a
+              href="https://codebook.in/" target="_blank">CodeBook.in</a></span>
+        </footer>
+
+        <!-- partial -->
+      </div>
+      <!-- main-panel ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+  </div>
+  <!-- container-scroller -->
+
+  <!-- base:js -->
+  <script src="{% static 'admin/vendors/base/vendor.bundle.base.js' %} "></script>
+  <!-- endinject -->
+  <!-- Plugin js for this page-->
+  <!-- End plugin js for this page-->
+  <!-- inject:js -->
+  <script src="{% static 'admin/js/off-canvas.js' %} "></script>
+  <script src="{% static 'admin/js/hoverable-collapse.js' %} "></script>
+  <script src="{% static 'admin/js/template.js' %} "></script>
+  <!-- endinject -->
+  <!-- plugin js for this page -->
+  <script src="{% static 'admin/vendors/chart.js/Chart.min.js' %} "></script>
+  <script src="{% static 'admin/vendors/jquery-bar-rating/jquery.barrating.min.js' %} "></script>
+  <!-- End plugin js for this page -->
+  <!-- Custom js for this page-->
+  <script src="{% static 'admin/js/dashboard.js' %} "></script>
+  <!-- End custom js for this page-->
+
+  <!-- js validations -->
+  <script type="text/javascript">
+    function loginvalidation() {
+        var Name = document.myform.name
+        var Phonenumber = document.myform.phonenumber
+        var Campusname = document.myform.campusname
+        var Blockname = document.myform.blockname
+        var Email = document.myform.email
+        var Passw = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{5,16}$/;
+        var mailformat = /^\w+([\.-]?\w+)@\w+([\.-]?\w+)(\.\w{2,3})+$/;
+        var Password = document.myform.password
+        var Photo12 = document.myform.photo
+        
+        
+        if (Name.value == "") {
+            alert("Please Enter Your Name:");
+            Name.focus();
+            return false;
+        }
+        if (Phonenumber.value.length != 10) {
+            alert("please Enter valid Phone number");
+            Phonenumber.focus();
+            return false;
+        }
+        if (Phonenumber.value.length <= 0) {
+            alert("Please Enter ten digits valid Phone Number");
+            Phonenumber.focus();
+            return false;
+        }
+        if (Campusname.value == "") {
+            alert("Please Enter Your Campus Name:");
+            Campusname.focus();
+            return false;
+        }
+        if (Blockname.value == "") {
+            alert("Please Enter Your Block Name:");
+            Blockname.focus();
+            return false;
+        }
+        if (Email.value == "") {
+            alert("Please Enter your email address");
+            Email.focus();
+            return false;
+        }
+        if (!Email.value.match(mailformat)) {
+            alert("Invalid Email address format");
+            Email.focus();
+            return false;
+        }
+        if (Password.value.length <= 0) {
+            alert("Please Enter Your Password")
+            Password.focus();
+            return false;
+        }
+        // // if (!Password.value.match(passw)) {
+        // //     alert("Your password should must be special Characters and Numbers")
+        // //     Password.focus();
+        //     return false;
+        // }
+        if (Password.value.length < 6) {
+            alert("Your password should not be less then six Characters")
+            Password.focus();
+            return false;
+        }
+        if (Photo12.value == "") {
+            alert("Please Upload Profile Image:");
+            Photo12.focus();
+            return false;
+        }
+        // return true;
+    }
+</script>
+
+
+        {% if messages %}
+        {% for message in messages %}
+        {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+        <script>swal({
+            title: "Success!",
+            text: "{{message}}",
+            icon: "success",
+            button: "OK",
+          });
+        </script>
+
+        {% elif message.level == DEFAULT_MESSAGE_LEVELS.WARNING %}
+        <script>swal({
+            title: "Warning :)",
+            text: "{{message}}",
+            icon: "warning",
+            button: "OK",
+          });
+        </script>
+        {% elif message.level == DEFAULT_MESSAGE_LEVELS.INFO %}
+        <script>swal({
+            title: "error :)",
+            text: "{{message}}",
+            icon: "error",
+            button: "OK",
+          });
+        </script>
+        {% elif message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+        <script>swal({
+            title: "error :)",
+            text: "{{message}}",
+            icon: "error",
+            button: "OK",
+          });
+        </script>
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+
+<!-- password visibility in javascript-->
+<!-- <script >
+  function myFunction() {
+            var x = document.getElementById("myInput");
+            if (x.type === "password") {
+              x.type = "text";
+            } else {
+              x.type = "password";
+            }
+          }
+  </script> -->
+</body>
+
+</html>

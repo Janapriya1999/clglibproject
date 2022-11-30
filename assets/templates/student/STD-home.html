@@ -1,0 +1,478 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Student</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Favicon -->
+    <link href="{% static 'student/img/favicon.icon'%}" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter:wght@700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="{% static 'student/lib/animate/animate.min.css' %}" rel="stylesheet">
+    <link href="{% static 'student/lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="{% static 'student/css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="{% static 'student/css/style.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'student/css/dashboard.css' %}">
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+</head>
+
+<body>
+    <div class="container-xxl bg-white p-0">
+
+        <!-- Navbar & Hero Start -->
+        <div class="container-xxl position-relative p-0" style="background-color: #00b98e;">
+            <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
+                <a href="{% url 'student-home' %}" class="navbar-brand p-0">
+                    <h1 class="m-0"> <i class="fa fa-book-open"></i>
+                        Student
+                    </h1>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <span class="fa fa-bars"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav ms-auto py-0">
+                        <a href="{% url 'student-home' %}" class="nav-item nav-link">Dashboard</a>
+                        <a href="{% url 'student-search-book' %}" class="nav-item nav-link">Search Books</a>
+                        <a href="{% url 'student-mylibrary' %}" class="nav-item nav-link">My Library</a>
+                        <a href="{% url 'student-myprofile' %}" class="nav-item nav-link">My Profile</a>
+                        <a href="{% url 'student-feedback' %}" class="nav-item nav-link">FeedBack</a>
+                    </div>
+                    <a href="{% url 'main-home' %}"
+                        class="btn btn-light rounded-pill text-primary py-2 px-4 ms-lg-5">Logout</a>
+                </div>
+            </nav>
+
+
+
+            <div class="container-xxl mb-5 page-header">
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-2"></div>
+                        <div class="col-8">
+                            <h1 class="text-white text-center animated zoomIn">Campus Library</h1>
+                            <p class="text-white text-center  text-center animated zoomIn">
+                                The first and foremost benefit is getting free
+                                books. Yes! Free books! We often forget that libraries let you borrow books for
+                                absolutely free. Availability of all kinds of books. A library is the biggest resource
+                                for books. You can find all sorts of books here. ...
+                            </p>
+                        </div>
+                        <div class="col-2"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Navbar & Hero End -->
+
+        <!-- Service Start -->
+        <div class="container-xxl py-6">
+            <div class="container">
+                <div class="mx-auto text-center wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+                    <div class="d-inline-block border rounded-pill text-primary px-4 mb-5">Our Services</div>
+                    <!-- <h2 class="mb-5">We Provide Solutions On Your Business</h2> -->
+                </div>
+                <div class="row g-4">
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="service-item rounded h-100">
+                            <div class="d-flex justify-content-between">
+                                <div class="service-icon">
+                                    <i class="fa fa-user-tie fa-2x"></i>
+                                </div>
+                                <a class="service-btn" href="">
+                                    <i class="fa fa-link fa-2x"></i>
+                                </a>
+                            </div>
+                            <div class="p-5">
+                                <h5 class="mb-3">Number of Books in Library</h5>
+                                <h4 class="text-danger font-weight-bold mb-2">{{data}}</h4>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                        <div class="service-item rounded h-100">
+                            <div class="d-flex justify-content-between">
+                                <div class="service-icon">
+                                    <i class="fa fa-chart-pie fa-2x"></i>
+                                </div>
+                                <a class="service-btn" href="">
+                                    <i class="fa fa-link fa-2x"></i>
+                                </a>
+                            </div>
+                            <div class="p-5">
+                                <h5 class="mb-3">Number Of Books Issued To Student</h5>
+                                <h4 class="text-danger font-weight-bold mb-2">{{issu}}</h4>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.6s">
+                        <div class="service-item rounded h-100">
+                            <div class="d-flex justify-content-between">
+                                <div class="service-icon">
+                                    <i class="fa fa-chart-line fa-2x"></i>
+                                </div>
+                                <a class="service-btn" href="">
+                                    <i class="fa fa-link fa-2x"></i>
+                                </a>
+                            </div>
+                            <div class="p-5">
+                                <h5 class="mb-3">Number Of Books Returned By Student</h5>
+                                <h4 class="text-danger font-weight-bold mb-2">{{ret}}</h4>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="service-item rounded h-100">
+                            <div class="d-flex justify-content-between">
+                                <div class="service-icon">
+                                    <i class="fa fa-chart-area fa-2x"></i>
+                                </div>
+                                <a class="service-btn" href="">
+                                    <i class="fa fa-link fa-2x"></i>
+                                </a>
+                            </div>
+                            <div class="p-5">
+                                <h5 class="mb-3">Number Of Books in Pending at Student</h5>
+                                <span>Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam
+                                    sed stet lorem.</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                        <div class="service-item rounded h-100">
+                            <div class="d-flex justify-content-between">
+                                <div class="service-icon">
+                                    <i class="fa fa-balance-scale fa-2x"></i>
+                                </div>
+                                <a class="service-btn" href="">
+                                    <i class="fa fa-link fa-2x"></i>
+                                </a>
+                            </div>
+                            <div class="p-5">
+                                <h5 class="mb-3">legal Advisory</h5>
+                                <span>Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam
+                                    sed stet lorem.</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.6s">
+                        <div class="service-item rounded h-100">
+                            <div class="d-flex justify-content-between">
+                                <div class="service-icon">
+                                    <i class="fa fa-house-damage fa-2x"></i>
+                                </div>
+                                <a class="service-btn" href="">
+                                    <i class="fa fa-link fa-2x"></i>
+                                </a>
+                            </div>
+                            <div class="p-5">
+                                <h5 class="mb-3">Tax & Insurance</h5>
+                                <span>Erat ipsum justo amet duo et elitr dolor, est duo duo eos lorem sed diam stet diam
+                                    sed stet lorem.</span>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+        <!-- Service End -->
+
+        <!-- Client Start 1-->
+        <div class="mx-auto text-center mt-5 mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+            <div class="d-inline-block border rounded-pill text-primary px-4">New Books</div>
+        </div>
+        <div class="container-xxl bg-primary my-5 py-5 wow fadeInUp" data-wow-delay="0.1s">
+            <div class="container">
+
+                <div class="owl-carousel client-carousel">
+                    <a href="#"><img class="img-fluid" src="{% static 'student/img/one.jpg' %}" alt=""></a>
+                    <a href="#"><img class="img-fluid" src="{% static 'student/img/two.jpg' %}" alt=""></a>
+                    <a href="#"><img class="img-fluid" src="{% static 'student/img/three.jpg' %}" alt=""></a>
+                    <a href="#"><img class="img-fluid" src="{% static 'student/img/four.jpg' %}" alt=""></a>
+                    <a href="#"><img class="img-fluid" src="{% static 'student/img/five.jpg' %}" alt=""></a>
+                    <a href="#"><img class="img-fluid" src="{% static 'student/img/six.jpg' %}" alt=""></a>
+                    <a href="#"><img class="img-fluid" src="{% static 'student/img/seven.jpg' %}" alt=""></a>
+                    <a href="#"><img class="img-fluid" src="{% static 'student/img/eight.jpg' %}" alt=""></a>
+                </div>
+            </div>
+        </div>
+        <!-- Client End 1-->
+        
+        <!-- Features Start -->
+        <div class="container-xxl py-6">
+            <div class="container">
+                <div class="row g-5">
+                    <div class="col-lg-12 wow fadeInUp" data-wow-delay="0.1s">
+                        <center>
+                            <div class="d-inline-block border rounded-pill text-primary px-4 mb-3">Importance</div>
+                        </center>
+
+                        <h2 class="mb-3 text-center">Reasons Your College Library Is So Valuable</h2>
+                        <p class="mt-3 text-center">
+                            Your college library offers a variety of resources that can help you earn your degree,
+                            regardless of the subject or level you’re pursuing.
+                            This is through providing an environment conducive to learning, helpful librarians, and a
+                            variety of reference materials.
+                            The library is the center of learning at your college. That means you should get a good feel
+                            for all of the resources available there, how to access them, and meet your librarians
+                            because your college library will be a big part of your studies while you pursue your degree
+                            and do your research.
+                            In fact, whether you’re earning an <b class="text-primary">associate’s degree, bachelor’s
+                                degree, master’s degree, or online certificate,</b> your library has access to
+                            databases, books, journals, and other resources to help you.
+
+                            And, if you’re earning your degree online and aren’t close enough to campus, <b
+                                class="text-primary">your local public library</b> has many of the same resources
+                            available.
+                        </p>
+                    </div>
+                    <!-- <div class="col-lg-7"> -->
+                    <div class="row mt-5 mb-5 g-5 text-right">
+                        <div class="col-sm-6 wow fadeIn" data-wow-delay="0.1s">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="flex-shrink-0 btn-square bg-primary rounded-circle me-3">
+                                    <i class="fa fa-book-open text-white"></i>
+                                </div>
+                                <h6 class="mb-0"> Your Librarians</h6>
+                            </div>
+                            <span>The librarians at your college library are there to help you. In fact, they’re some of
+                                the few people who actually get a kick out of scouring all of the available resources to
+                                find the information you’re looking for. <br>
+
+                                <!-- Plus, you get to talk to a real person and ask them a series of questions about a specific topic, as opposed to working by yourself online. <br>
+                                    
+                                    And, with their vast knowledge of reliable sources, librarians can point you in the right direction to make sure that you have access to the resources that will help answer your questions.</span> -->
+                        </div>
+                        <div class="col-sm-6 wow fadeIn" data-wow-delay="0.2s">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="flex-shrink-0 btn-square bg-primary rounded-circle me-3">
+                                    <i class="fa fa-book-open text-white"></i>
+                                </div>
+                                <h6 class="mb-0"> Interlibrary Loan Program</h6>
+                            </div>
+                            <span>While your university library has plenty of books, journals, magazines, newspapers,
+                                and tons of other resources, there may some that they don’t have. </span>
+                        </div>
+                        <div class="col-sm-6 wow fadeIn" data-wow-delay="0.3s">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="flex-shrink-0 btn-square bg-primary rounded-circle me-3">
+                                    <i class="fa fa-book-open text-white"></i>
+                                </div>
+                                <h6 class="mb-0">Quiet Environment for Studying</h6>
+                            </div>
+                            <span>One of the most important aspects of your college library is the quiet environment
+                                that promotes studying and learning. Your dorm or apartment has tons of distractions,
+                                such as social media, video games, and Netflix.</span>
+                        </div>
+                        <div class="col-sm-6 wow fadeIn" data-wow-delay="0.4s">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="flex-shrink-0 btn-square bg-primary rounded-circle me-3">
+                                    <i class="fa fa-book-open text-white"></i>
+                                </div>
+                                <h6 class="mb-0">Reference Materials</h6>
+                            </div>
+                            <span>your college library has a number of reference materials from trustworthy sources that
+                                don’t require you to double check any of the information. </span>
+                        </div>
+                        <div class="col-sm-6 wow fadeIn" data-wow-delay="0.5s">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="flex-shrink-0 btn-square bg-primary rounded-circle me-3">
+                                    <i class="fa fa-book-open text-white"></i>
+                                </div>
+                                <h6 class="mb-0">Tutoring Services</h6>
+                            </div>
+                            <span>Besides the resources your library has both in print and online, many also have
+                                tutoring services that operate through the library. In fact, at some schools you can go
+                                to the front desk and ask a librarian the best ways to meet a tutor for the specific
+                                subject you’re struggling with.</span>
+                        </div>
+                        <div class="col-sm-6 wow fadeIn" data-wow-delay="0.6s">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="flex-shrink-0 btn-square bg-primary rounded-circle me-3">
+                                    <i class="fa fa-book-open text-white"></i>
+                                </div>
+                                <h6 class="mb-0">Technology</h6>
+                            </div>
+                            <span>Luckily, your college library provides access to a variety of technologies that can
+                                help you with your studies, such as:
+
+                                Computers,
+                                Tablets,
+                                eBooks,
+                                Printers</span>
+
+                        </div>
+                    </div>
+                    <!-- </div> -->
+                </div>
+            </div>
+        </div>
+        <!-- Features End -->
+
+
+
+        
+
+
+        <!-- Testimonial Start -->
+        <!-- <div class="container-xxl py-6">
+            <div class="container">
+                <div class="mx-auto mt-3 text-center wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+                    <div class="d-inline-block border rounded-pill text-primary px-4 mb-3 mt-5">Testimonial</div>
+                    <h2 class="mb-5">Feedbacks from Students</h2>
+                </div>
+                <div class="owl-carousel testimonial-carousel wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="testimonial-item rounded p-4">
+                        <i class="fa fa-quote-left fa-2x text-primary mb-3"></i>
+                        <p>College Library is the best place to read and write and study.
+                            I used to go to library every day one hour in
+                            the evening session to get the technical skills.</p>
+                        <div class="d-flex align-items-center">
+                            <img class="img-fluid flex-shrink-0 rounded-circle" src="{% static 'student/img/testimonial-1.jpg' %}">
+                            <div class="ps-3">
+                                <h6 class="mb-1">Raghav</h6>
+                                <small>Civil Engineering</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-item rounded p-4">
+                        <i class="fa fa-quote-left fa-2x text-primary mb-3"></i>
+                        <p>Receiving Books from college library and reading them at the mid exams, external & internal
+                            exams time, those books are more important.</p>
+                        <div class="d-flex align-items-center">
+                            <img class="img-fluid flex-shrink-0 rounded-circle" src="{% static 'student/img/testimonial-2.jpg' %}">
+                            <div class="ps-3">
+                                <h6 class="mb-1">Mansih</h6>
+                                <small>Computer Science</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-item rounded p-4">
+                        <i class="fa fa-quote-left fa-2x text-primary mb-3"></i>
+                        <p>My College Library has lot many technical books and management books to read and take home if
+                            we want. </p>
+                        <div class="d-flex align-items-center">
+                            <img class="img-fluid flex-shrink-0 rounded-circle" src="{% static 'student/img/testimonial-3.jpg' %}">
+                            <div class="ps-3">
+                                <h6 class="mb-1">Nithya</h6>
+                                <small>Information Technology</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-item rounded p-4">
+                        <i class="fa fa-quote-left fa-2x text-primary mb-3"></i>
+                        <p>Good Atmosphere to read the books at any time. And if u want to increase knowledge and skills
+                            please read more books.</p>
+                        <div class="d-flex align-items-center">
+                            <img class="img-fluid flex-shrink-0 rounded-circle" src="{% static 'student/img/testimonial-4.jpg' %}">
+                            <div class="ps-3">
+                                <h6 class="mb-1">Chitra Takkur</h6>
+                                <small>Mechanical Engineering</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+        <!-- Testimonial End -->
+
+        <!-- Footer Start -->
+        <div class="container-fluid bg-dark text-light  pt-5  wow fadeIn" data-wow-delay="0.1s">
+            <div class="container">
+                <div class="copyright">
+                    <div class="row text-center">
+                        <div class="col-md-12 text-center ">
+                            &copy; Copyright © 2022 <a class="border-bottom text-primary" href="#">Web Based College
+                                Library
+                                Management System</a>, All Right Reserved. <br>
+                            Web Designed By <a class="border-bottom text-primary"
+                                href="https://codebook.in/">Codebook.in</a> <br><br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End -->
+
+
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+    </div>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'student/lib/wow/wow.min.js' %}"></script>
+    <script src="{% static 'student/lib/easing/easing.min.js' %}"></script>
+    <script src="{% static 'student/lib/waypoints/waypoints.min.js' %}"></script>
+    <script src="{% static 'student/lib/owlcarousel/owl.carousel.min.js' %}"></script>
+
+    <!-- Template Javascript -->
+    <script src="{% static 'student/js/main.js' %}"></script>
+
+    {% if messages %}
+    {% for message in messages %}
+    {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+    <script>swal({
+            title: "Login Success!",
+            text: "{{message}}",
+            icon: "success",
+            button: "OK",
+        });
+    </script>
+
+    {% elif message.level == DEFAULT_MESSAGE_LEVELS.WARNING %}
+    <script>swal({
+            title: "Warning :)",
+            text: "{{message}}",
+            icon: "warning",
+            button: "OK",
+        });
+    </script>
+    {% elif message.level == DEFAULT_MESSAGE_LEVELS.INFO %}
+    <script>swal({
+            title: "error :)",
+            text: "{{message}}",
+            icon: "error",
+            button: "OK",
+        });
+    </script>
+    {% elif message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+    <script>swal({
+            title: "error :)",
+            text: "{{message}}",
+            icon: "error",
+            button: "OK",
+        });
+    </script>
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+</body>
+
+</html>

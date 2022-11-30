@@ -1,0 +1,239 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Student</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Favicon -->
+    <link href="{% static 'student/img/favicon.icon'%}" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter:wght@700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="{% static 'student/lib/animate/animate.min.css'%}" rel="stylesheet">
+    <link href="{% static 'student/lib/owlcarousel/assets/owl.carousel.min.css'%}" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="{% static 'student/css/bootstrap.min.css'%}" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="{% static 'student/css/style.css'%}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'student/css/dashboard.css'%}">
+</head>
+
+<body>
+    <div class="container-xxl bg-white p-0">
+
+        <!-- Navbar & Hero Start -->
+        <div class="container-xxl position-relative p-0">
+            <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
+                <a href="{% url 'student-home' %}" class="navbar-brand p-0">
+                    <h1 class="m-0"> <i class="fa fa-book-open"></i>
+                        Student
+                    </h1>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <span class="fa fa-bars"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav ms-auto py-0">
+                        <a href="{% url 'student-home' %}" class="nav-item nav-link">Dashboard</a>
+                        <a href="{% url 'student-search-book' %}" class="nav-item nav-link">Search Books</a>
+                        <a href="{% url 'student-mylibrary' %}" class="nav-item nav-link">My Library</a>
+                        <a href="{% url 'student-myprofile' %}" class="nav-item nav-link">My Profile</a>
+                        <a href="{% url 'student-feedback' %}" class="nav-item nav-link">FeedBack</a>
+                    </div>
+                    <a href="{% url 'main-home' %}"
+                        class="btn btn-light rounded-pill text-primary py-2 px-4 ms-lg-5">Logout</a>
+                </div>
+            </nav>
+
+            <div class="container-xxl bg-primary mb-5 page-header">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-2"></div>
+                        <div class="col-8">
+                            <h1 class="text-white text-center animated zoomIn">Issued Books</h1>
+                        </div>
+                        <div class="col-2"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Navbar & Hero End -->
+        <div class="container-fluid bg-light py-3">
+            <div class="container-fluid mb-0">
+                <div class="mx-auto text-center wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+                    <div class="d-inline-block border rounded-pill text-primary px-4 mb-3 mt-5">View Issued Books by
+                        Librarian</div>
+                    <h4 class="mb-5 text-dark">Here is the table represents the database of issued books by librarian to
+                        students</h4>
+                </div>
+                <div class="row g-4 ">
+
+                    <div class="col-1"></div>
+                    <div class="col-lg-10 justify-content-center col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="service-item rounded h-100">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr class="font-weight-bold text-dark">
+                                                    <th>BOOK COVER</th>
+                                                    <th>BOOK TITLE</th>
+                                                    <th>STD ID</th>
+                                                    <th>AUTHOR NAME</th>
+                                                    <th>DEPARTMENT</th>
+                                                    <th>EDITION</th>
+                                                    <th>ISSUED
+                                                        STATUS
+                                                    </th>
+                                                    <!-- <th>RETURN STATUS</th> -->
+                                                    <th>FINAL STATUS</th>
+                                                    <th>ACTIONS</th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for i in my %}
+                                                <tr>
+                                                    <td class="py-1">
+                                                        <img src="/media/{{i.librarian_id.bookphoto}}" alt="image"
+                                                            class="rounded-pill" style="width: 50px; height: 50px;">
+                                                    </td>
+
+                                                    <th>{{i.librarian_id.booktitle}}</td>
+                                                    <td>{{i.stu_id.student_id}}</td>
+                                                    <td>{{i.librarian_id.authorname}}</td>
+                                                    <td>{{i.librarian_id.department}}</td>
+                                                    <td>{{i.librarian_id.edition}}</td>
+
+                                                    {% if i.librarian_status == "pending" %}
+                                                    <td><label class="badge font-weight-bold"
+                                                            style="background-color:coral; color: white;">{{i.librarian_status}}</label>
+                                                    </td>
+                                                    {% elif i.librarian_status == "Issued" %}
+                                                    <td><label class="badge font-weight-bold"
+                                                            style="background-color:slateblue; color: white;">{{i.librarian_status}}</label>
+                                                    </td>
+                                                    {% else %}
+                                                    <td><label class="badge font-weight-bold"
+                                                            style="background-color:crimson; color: white;">{{i.librarian_status}}</label>
+                                                    </td>
+                                                    {% endif %}
+                                                    <!-- {% if i.return_book_status == "None" %}
+                                                    <td>
+                                                        <label class="badge bg-success text-white">Not Returned</label>
+                                                    </td>
+                                                    {% elif i.return_book_status == "pending" %}
+                                                    <td>
+                                                        <label class="badge bg-success text-white">Pending</label>
+                                                    </td>
+        
+                                                    {% elif i.return_book_status == "completed" %}
+                                                    <td>
+                                                        <label class="badge bg-success text-white">Completed</label>
+                                                    </td>
+                                                    {% else %}
+                                                    <td>
+                                                        <label class="badge bg-success text-white">Returned</label>
+                                                    </td>
+                                                    {% endif %} -->
+                                                    {% if i.return_book_status == 'pending' %}
+                                                    <td><label
+                                                        class="badge font-weight-bold" style="background-color:coral; color: white;">{{i.return_book_status}}</label>
+                                                    </td>
+                                                    {% elif i.return_book_status == 'Processing' %}
+                                                    <td><label
+                                                        class="badge font-weight-bold" style="background-color:rgb(72, 184, 165); color: white;">{{i.return_book_status}}</label>
+                                                    </td>
+                                                    {% else 
+                                                    <td><label
+                                                        class="badge font-weight-bold" class="sr-only" style="background-color:slateblue; color: white;">{{i.return_book_status}}</label>
+                                                    </td>
+                                                    {% endif %}
+
+                                                    {% if i.return_book_status == 'Returned' %}
+                                                    <td>
+
+                                                        <a href=""
+                                                        class="badge font-weight-bold" style="background-color: gray; color: white;" type="submit">Return</a>
+                        
+                                                    </td>
+                                                    {% elif i.librarian_status == 'Issued'  %}
+                                                    <td>
+
+                                                        <a href="/student-return/{{i.view_id}}"
+                                                        class="badge font-weight-bold" style="background-color:deeppink; color: white;" type="submit">Return</a>
+
+                                                    </td>
+                                                    {% else %}
+                                                    <td>
+                                                        <a href="" class="badge font-weight-bold" style="background-color:darkorange; color: white;" >Return</a>
+                                                    </td>
+                                                    {% endif %}
+                                                </tr>
+                                                {% endfor %}
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <!-- Back to Top -->
+            <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+        </div>
+        <!-- Service Start -->
+        <!-- Footer Start -->
+        <div class="container-fluid bg-dark text-light  pt-5  wow fadeIn" data-wow-delay="0.1s"
+            style="margin-top: 6rem;">
+            <div class="container">
+                <div class="copyright">
+                    <div class="row text-center">
+                        <div class="col-md-12 text-center ">
+                            &copy; Copyright © 2022 <a class="border-bottom text-primary" href="#">Web Based College
+                                Library
+                                Management System</a>, All Right Reserved. <br>
+                            Web Designed By <a class="border-bottom text-primary"
+                                href="https://codebook.in/">Codebook.in</a> <br><br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End -->
+
+        <!-- JavaScript Libraries -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="{% static 'student/lib/wow/wow.min.js' %}"></script>
+        <script src="{% static 'student/lib/easing/easing.min.js' %}"></script>
+        <script src="{% static 'student/lib/waypoints/waypoints.min.js' %}"></script>
+        <script src="{% static 'student/lib/owlcarousel/owl.carousel.min.js' %}"></script>
+
+        <!-- Template Javascript -->
+        <script src="{% static 'student/js/main.js' %}"></script>
+</body>
+
+</html>

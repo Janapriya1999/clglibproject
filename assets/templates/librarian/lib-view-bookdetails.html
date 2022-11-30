@@ -1,0 +1,280 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Librarian Account</title>
+  <!-- base:css -->
+  <link rel="stylesheet" href="{% static 'librarian/vendors/mdi/css/materialdesignicons.min.css' %}">
+  <link rel="stylesheet" href="{% static 'librarian/vendors/feather/feather.css' %}">
+  <link rel="stylesheet" href="{% static 'librarian/vendors/base/vendor.bundle.base.css' %}">
+  <!-- endinject -->
+  <!-- plugin css for this page -->
+  <link rel="stylesheet" href="{% static 'librarian/vendors/flag-icon-css/css/flag-icon.min.css' %}" />
+  <link rel="stylesheet" href="{% static 'librarian/vendors/font-awesome/css/font-awesome.min.css' %}">
+  <link rel="stylesheet" href="{% static 'librarian/vendors/jquery-bar-rating/fontawesome-stars-o.css' %}">
+  <link rel="stylesheet" href="{% static 'librarian/vendors/jquery-bar-rating/fontawesome-stars.css' %}">
+  <!-- End plugin css for this page -->
+  <!-- inject:css -->
+  <link rel="stylesheet" href="{% static 'librarian/css/style.css' %}">
+  <!-- endinject -->
+  <link rel="shortcut icon" href="{% static 'librarian/images/favicon.png' %}" />
+</head>
+
+<body>
+  <div class="container-scroller">
+    <!-- partial:partials/_navbar.html -->
+    <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+      <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+        <a class="navbar-brand brand-logo" style="color: white; background-image: white;" href="{% url 'lib-home' %}">
+          <img src="{% static 'librarian/images/icons8-library-building-50.png' %}"
+            style="width: 40px; height: 40px; margin-right: 2px; color: white;">LIBRARY</a>
+        <a class="navbar-brand brand-logo-mini" href="{% url 'lib-home' %}">
+          <img src="{% static 'librarian/images/logo-mini.svg' %}" alt="logo" /></a>
+      </div>
+      <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
+        <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+          <span class="icon-menu"></span>
+        </button>
+        <ul class="navbar-nav mr-lg-2">
+          <li class="nav-item nav-search d-none d-lg-block">
+            <!-- <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="search">
+                  <i class="icon-search"></i>
+                </span>
+              </div>
+              <input type="text" class="form-control" placeholder="Search Projects.." aria-label="search"
+                aria-describedby="search">
+            </div> -->
+          </li>
+        </ul>
+        <ul class="navbar-nav navbar-nav-right">
+
+          <li class="nav-item dropdown d-flex mr-4 ">
+            <a class="nav-link count-indicator dropdown-toggle d-flex align-items-center justify-content-center"
+              id="notificationDropdown" href="#" data-toggle="dropdown">
+              <i class="icon-cog"></i>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
+              aria-labelledby="notificationDropdown">
+              <p class="mb-0 font-weight-normal float-left dropdown-header">Settings</p>
+              <a class="dropdown-item preview-item" href="{% url 'lib-profile' %}">
+                <i class="icon-head"></i> Profile
+              </a>
+              <a class="dropdown-item preview-item" href="{% url 'main-librarian-login' %}">
+                <i class="icon-inbox"></i> Logout
+              </a>
+            </div>
+          </li>
+
+        </ul>
+        <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
+          data-toggle="offcanvas">
+          <span class="icon-menu"></span>
+        </button>
+      </div>
+    </nav>
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+      <!-- partial:partials/_sidebar.html -->
+      <nav class="sidebar sidebar-offcanvas" id="sidebar">
+        {% for i in profile %}
+      <div class="user-profile">
+        <div class="user-image">
+          <img src="/media/{{i.librarian_photo}}">
+        </div>
+        {% endfor %}
+        <div class="user-name">
+          Librarian
+        </div>
+        <!-- <div class="user-designation">
+            Developer
+        </div> -->
+      </div>
+      <ul class="nav">
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'lib-home' %}">
+            <i class="icon-box menu-icon"></i>
+            <span class="menu-title">Home</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+            <i class="icon-book menu-icon"></i>
+            <span class="menu-title">Book Management</span>
+            <i class="menu-arrow"></i>
+          </a>
+          <div class="collapse" id="ui-basic">
+            <ul class="nav flex-column sub-menu">
+              <li class="nav-item"> <a class="nav-link" href="{% url 'lib-add-book' %}">Add Books</a></li>
+              <li class="nav-item"> <a class="nav-link" href="{% url 'lib-search' %}">Search Panel</a></li>
+              <li class="nav-item"> <a class="nav-link" href="{% url 'lib-issue-book' %}">Request Panel</a></li>
+              <li class="nav-item"> <a class="nav-link" href="{% url 'lib-return-book' %}">Issue Panel</a></li>
+
+
+              <!-- <li class="nav-item"> <a class="nav-link" href="{% url 'lib-issued-book' %}">View Issued & Returned 
+                  Books</a></li>-->
+
+            </ul>
+          </div>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'lib-sentiment' %}">
+            <i class="icon-help menu-icon"></i>
+            <span class="menu-title">Sentiment Analysis</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'lib-feedback' %}">
+            <i class="icon-air-play menu-icon"></i>
+            <span class="menu-title">FeedBack</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+      <!-- partial -->
+      <div class="main-panel">
+        <div class="content-wrapper">
+          <div class="row">
+            <div class="col-sm-12 mb-4 mb-xl-0">
+              <h4 class="font-weight-bold text-dark text-center">View Book Details</h4><br>
+            </div>
+          </div>
+          <div class="container-xxl py-6">
+            <div class="container  mb-5">
+              <div class="mx-auto text-center wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+                <!-- <div class="d-inline-block border rounded-pill text-primary px-4 mb-3">Book Details</div><br><br> -->
+              </div>
+
+              <div class="card">
+                <div class="container rounded bg-white">
+                  <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="row">
+                      {% for i in issue %}
+                      <div class="col-md-4 bg-primary border-right">
+                        <div class="d-flex flex-column align-items-center text-center p-3 py-5"> <br>
+                          <img class="img-thumbnail mt-2 mb-2" style="width: 270px; height: 250px;"
+                            src="/media/{{i.bookphoto}}"> <br>
+                          <h6><span class="font-weight-bold text-white">{{i.booktitle}}<br>
+                            </span>
+                          </h6>
+                          <!-- <span class="text-black-50">kishoreangara1999@gmail.com</span><span> </span> -->
+                        </div>
+                      </div>
+                      <div class="col-md-8 border-right">
+
+                        <div class="p-3 py-5">
+                          <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h4 class="text-right">Book Details</h4>
+
+                          </div>
+
+                          <div class="row mt-2">
+                            <div class="col-md-3"><label class="labels text-dark">Book Title </label></div>
+                            <div class="col-md-1"><label class="labels text-dark"> : </label></div>
+                            <div class="col-md-8"><label class="labels text-dark">{{i.booktitle}}
+                                System</label></div>
+                          </div>
+                          <div class="row mt-2">
+                            <div class="col-md-3"><label class="labels text-dark">Author Name </label></div>
+                            <div class="col-md-1"><label class="labels text-dark"> : </label></div>
+                            <div class="col-md-8"><label class="labels text-dark">{{i.authorname}}
+                                Vijay</label></div>
+                          </div>
+
+                          <div class="row mt-2">
+                            <div class="col-md-3"><label class="labels text-dark">Department </label></div>
+                            <div class="col-md-1"><label class="labels text-dark"> : </label></div>
+                            <div class="col-md-8"><label class="labels text-dark">{{i.department}}</label></div>
+                          </div>
+                          <div class="row mt-2">
+                            <div class="col-md-3"><label class="labels text-dark">Publisher </label></div>
+                            <div class="col-md-1"><label class="labels text-dark"> : </label></div>
+                            <div class="col-md-8"><label class="labels text-dark">{{i.publisher}}
+                                Ltd</label></div>
+                          </div>
+                          <div class="row mt-2">
+                            <div class="col-md-3"><label class="labels text-dark">Edition </label></div>
+                            <div class="col-md-1"><label class="labels text-dark"> : </label></div>
+                            <div class="col-md-8"><label class="labels text-dark">{{i.edition}}</label></div>
+                          </div>
+                          <!-- <div class="row mt-2">
+                                        <div class="col-md-3"><label class="labels text-dark">Pages </label></div>
+                                        <div class="col-md-1"><label class="labels text-dark"> : </label></div>
+                                        <div class="col-md-8"><label class="labels text-dark">322</label></div>
+                                    </div> -->
+                          <div class="row mt-2">
+                            <div class="col-md-3"><label class="labels text-dark">Description </label></div>
+                            <div class="col-md-1"><label class="labels text-dark"> : </label></div>
+                            <div class="col-md-8"><label class="labels text-dark">{{i.description}}</label></div>
+                          </div>
+                          <div class="mt-5 text-center">
+                            <button class="btn btn-success btn-lg profile-button" type="button">
+                              Accept
+                            </button>
+                            <button class="btn btn-danger btn-lg profile-button" type="button">
+                              Decline
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                      {% endfor %}
+                    </div>
+                  </form>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+        <!-- content-wrapper ends -->
+
+        <!-- partial:partials/_footer.html -->
+        <footer class="footer">
+          <div class="d-sm-flex justify-content-center justify-content-sm-between">
+            <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © Web Based College
+              Library Management System
+              2020</span>
+
+          </div>
+          <span class="text-muted d-block text-center text-sm-left d-sm-inline-block mt-2">Designed By <a
+              href="https://codebook.in/" target="_blank">CodeBook.in</a></span>
+        </footer>
+
+        <!-- partial -->
+      </div>
+      <!-- main panel -->
+
+      <!-- main-panel ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+  </div>
+  <!-- container-scroller -->
+
+  <!-- base:js -->
+  <script src="{% static 'librarian/vendors/base/vendor.bundle.base.js' %} "></script>
+  <!-- endinject -->
+  <!-- Plugin js for this page-->
+  <!-- End plugin js for this page-->
+  <!-- inject:js -->
+  <script src="{% static 'librarian/js/off-canvas.js' %} "></script>
+  <script src="{% static 'librarian/js/hoverable-collapse.js' %} "></script>
+  <script src="{% static 'librarian/js/template.js' %} "></script>
+  <!-- endinject -->
+  <!-- plugin js for this page -->
+  <script src="{% static 'librarian/vendors/chart.js/Chart.min.js' %} "></script>
+  <script src="{% static 'librarian/vendors/jquery-bar-rating/jquery.barrating.min.js' %} "></script>
+  <!-- End plugin js for this page -->
+  <!-- Custom js for this page-->
+  <script src="{% static 'librarian/js/dashboard.js' %} "></script>
+  <!-- End custom js for this page-->
+</body>
+
+</html>

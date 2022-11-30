@@ -1,0 +1,234 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Web Based College Library Management System</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Favicon -->
+    <link href="{% static 'main/img/favicon.ico' %}" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter:wght@700;800&display=swap" rel="stylesheet"> 
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="{% static 'main/lib/animate/animate.min.css' %}" rel="stylesheet">
+    <link href="{% static 'main/lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+
+    <!-- Customi{% static 'main/zed Bootstrap Stylesheet -->
+    <link href="{% static 'main/css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="{% static 'main/css/style.css' %}" rel="stylesheet">
+
+
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+</head>
+
+<body>
+    <div class="container-xxl bg-white p-0">
+        <!-- Spinner Start -->
+        <!-- <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div> -->
+        <!-- Spinner End -->
+
+
+        <!-- Navbar & Hero Start -->
+        <div class="container-xxl position-relative p-0">
+            <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
+                <a href="{% url 'main-home' %}" class="navbar-brand p-0">
+                    <h1 class="m-0"> <i class="fa fa-book-reader"></i>
+                        Library
+                    </h1>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <span class="fa fa-bars"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav ms-auto py-0">
+                        <a href="{% url 'main-home' %}" class="nav-item nav-link">Home</a>
+                        <a href="{% url 'main-about' %}" class="nav-item nav-link">About</a>
+                        <a href="{% url 'main-admin-login' %}" class="nav-item nav-link">Admin</a>
+                        <a href="{% url 'main-librarian-login'%}" class="nav-item nav-link">Librarian</a>
+                        <a href="{% url 'student-login' %}" class="nav-item nav-link">Student</a>
+                        <a href="{% url 'main-contact' %}" class="nav-item nav-link">Contact</a>
+                    </div>
+                </div>
+            </nav>
+
+            <div class="container-xxl bg-primary hero-header">
+                <div class="container">
+                    <div class="row  align-items-center">
+                        <div class="col-lg-6 text-center text-lg-start">
+                            <h1 class="text-white mb-4 animated zoomIn">Web Based College Library Management System</h1>
+                            <!-- <p class="text-white pb-3 animated zoomIn">Tempor rebum no at dolore lorem clita rebum rebum ipsum rebum stet dolor sed justo kasd. Ut dolor sed magna dolor sea diam. Sit diam sit justo amet ipsum vero ipsum clita lorem</p> -->
+                            <!-- <a href="" class="btn btn-outline-light rounded-pill border-2 py-3 px-5 animated slideInRight">Learn More</a> -->
+                        </div>
+                        <div class="col-lg-6 text-center text-lg-start" >
+                            <img class="img-fluid animated zoomIn" src="{% static 'main/img/l5.png' %}" alt="" style="height: 400px">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Navbar & Hero End -->
+
+
+        <!-- About Start -->
+        <div class="container-xxl py-6">
+            <div class="container">
+                <div class="row g-5 align-items-center">
+                    <div class="col-lg-6 wow zoomIn" data-wow-delay="0.1s">
+                        <img class="img-fluid" src="{% static 'main/img/l1.webp' %}" style="height: 350px;">
+                    </div>
+                    <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="d-inline-block border rounded-pill text-primary px-4 mb-3">About Us</div>
+                        <h2 class="mb-4">College Library Management System</h2>
+                        <p class="mb-4">A library management system is an example of an information system. An information system, whether it is computerised or not, is a system that represents objects in a physical system, for example, information resources in a library collection.</p>
+                        <div class="row g-3 mb-4">
+                            <div class="col-12 d-flex">
+                                <div class="flex-shrink-0 btn-lg-square rounded-circle bg-primary">
+                                    <i class="fa fa-book-reader text-white"></i>
+                                </div>
+                                <div class="ms-4">
+                                    <h6>Purpose Of College Library</h6>
+                                    <span>Your college library is your gateway to learning. And, at many schools, the library is the center of a college’s academic environment.</span>
+                                </div>
+                            </div>
+                            <div class="col-12 d-flex">
+                                <div class="flex-shrink-0 btn-lg-square rounded-circle bg-primary">
+                                    <i class="fa fa-book-reader text-white"></i>
+                                </div>
+                                <div class="ms-4">
+                                    <h6>Academic Library</h6>
+                                    <span>Instead, most academic libraries consist of a physical space (usually quite large but on occasion as small as one room) and a staff of librarians and other employees that manage the building and its collections.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <a class="btn btn-primary rounded-pill py-3 px-5 mt-2" href="{% url 'main-about' %}">Read More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- About End -->
+
+        
+
+        <!-- Footer Start -->
+        <div class="container-fluid bg-dark text-light footer pt-5 wow fadeIn" data-wow-delay="0.1s" style="margin-top: 6rem;">
+            <div class="container">
+                <div class="row g-5">
+                 <div class="col-md-6 col-lg-4">
+                        <h5 class="text-primary mb-4">Get In Touch</h5>
+                        <!-- <p><i class="fa fa-map-marker-alt me-3"></i>123 Street, New York, USA</p> -->
+                        <p><i class="fa fa-phone-alt me-3"></i>+91 6300 889 797</p>
+                        <p><i class="fa fa-envelope me-3"></i>collegelibraryhelpcenter@gmail.com</p>
+                        <div class="d-flex pt-2">
+                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-twitter"></i></a>
+                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-facebook-f"></i></a>
+                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-youtube"></i></a>
+                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-instagram"></i></a>
+                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-1"></div>
+                    <div class="col-md-6 col-lg-3"> <br>
+                        
+                        <!-- <h5 class="text-white mb-4">Popular Link</h5> -->
+                        <a class="btn btn-link" href="{% url 'main-home' %}">Home</a>
+                        <a class="btn btn-link" href="{% url 'main-about' %}">About Us</a>
+                        <a class="btn btn-link" href="{% url 'main-admin-login' %}">Admin</a>
+                        <a class="btn btn-link" href="{% url 'main-librarian-login' %}">Librarian</a>
+                        <a class="btn btn-link" href="{% url 'student-login' %}">Student</a>
+                        <a class="btn btn-link" href="{% url 'main-contact' %}">Contact</a>
+                    </div>
+                    <div class="col-md-6 col-lg-4">
+                        <h5 class="text-primary mb-4">Library</h5>
+                        <p>The library is the center of learning at your college.
+                            That means you should get a good feel for all of the resources available there,how to access them,
+                            and meet your librarians because your college library will be a big part of your studies while you pursue your degree and do your research.</p>
+                    </div>
+                </div>
+            </div><br><br><br>
+            <div class="container">
+                <div class="copyright">
+                    <div class="row text-center">
+                        <div class="col-md-12 text-center ">
+                            &copy; Copyright © 2022 <a class="border-bottom text-primary" href="#">Web Based College Library Management System</a>, All Right Reserved. <br>
+							Web Designed By <a class="border-bottom text-primary" href="https://codebook.in/">Codebook.in</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End -->
+        {% if messages %}              
+        {% for message in messages %}
+        {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+            <script>swal({
+            title: "Login Success!",
+            text: "{{message}}",
+            icon: "success",
+            button: "OK",
+            });
+            </script>
+            
+            {% elif message.level == DEFAULT_MESSAGE_LEVELS.WARNING %}
+                <script>swal({
+                title: "Warning :)",
+                text: "{{message}}",
+                icon: "warning",
+                button: "OK",
+                });
+            </script>
+            {% elif message.level == DEFAULT_MESSAGE_LEVELS.INFO %}
+            <script>swal({
+            title: "error :)",
+            text: "{{message}}",
+            icon: "error",
+            button: "OK",
+            });
+        </script>
+        {% elif message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+            <script>swal({
+            title: "error :)",
+            text: "{{message}}",
+            icon: "error",
+            button: "OK",
+            });
+        </script>
+            {% endif %}              
+        {% endfor %} 
+        {% endif %}
+
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+    </div>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'main/lib/wow/wow.min.js' %}"></script>
+    <script src="{% static 'main/lib/easing/easing.min.js' %}"></script>
+    <script src="{% static 'main/lib/waypoints/waypoints.min.js' %}"></script>
+    <script src="{% static 'main/lib/owlcarousel/owl.carousel.min.js' %}"></script>
+
+    <!-- Template Javascript -->
+    <script src="{% static 'main/js/main.js' %}"></script>
+</body>
+
+</html>

@@ -1,0 +1,304 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Student</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Favicon -->
+    <link href="{% static 'student/img/favicon.icon' %}" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter:wght@700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="{% static 'student/lib/animate/animate.min.css' %}" rel="stylesheet">
+    <link href="{% static 'student/lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="{% static 'student/css/bootstrap.min.css '%}" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="{% static 'student/css/style.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'student/css/dashboard.css' %}">
+    <script type="text/javascript">
+        function validate() {
+            var book = document.myform.search
+            if (book.value.length <= 0) {
+                alert("please give book title");
+                book.focus();
+                return false;
+
+            }
+        }
+
+    </script>
+</head>
+
+<body>
+    <div class="container-xxl bg-white p-0">
+
+        <!-- Navbar & Hero Start -->
+        <div class="container-xxl position-relative p-0">
+            <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
+                <a href="{% url 'student-home' %}" class="navbar-brand p-0">
+                    <h1 class="m-0"> <i class="fa fa-book-open"></i>
+                        Student
+                    </h1>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <span class="fa fa-bars"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav ms-auto py-0">
+                        <a href="{% url 'student-home' %}" class="nav-item nav-link">Dashboard</a>
+                        <a href="{% url 'student-search-book' %}" class="nav-item nav-link">Search Books</a>
+                        <a href="{% url 'student-mylibrary' %}" class="nav-item nav-link">My Library</a>
+                        <a href="{% url 'student-myprofile' %}" class="nav-item nav-link">My Profile</a>
+                        <a href="{% url 'student-feedback' %}" class="nav-item nav-link">FeedBack</a>
+                    </div>
+                    <a href="{% url 'main-home' %}"
+                        class="btn btn-light rounded-pill text-primary py-2 px-4 ms-lg-5">Logout</a>
+                </div>
+            </nav>
+
+            <div class="container-xxl bg-primary page-header">
+                <div class="row">
+                    <div class="col-2"></div>
+                    <div class="col-8">
+                        <h1 class="text-white text-center animated zoomIn">Search Books</h1>
+                    </div>
+                    <div class="col-2"></div>
+
+
+                    <!-- <div class="col-12"> -->
+
+                    <div class="search-box col-md-5">
+                        <form method="post" name="myform" onsubmit='return loginvalidation();'>
+                            {% csrf_token %}
+                            <div class="input-group">
+                                <div class="dropdown">
+                                        <!-- <li><a class="dropdown-item" href="#">Subject Code</a></li> -->
+
+                                    <!-- <button class="btn-lg btn-light dropdown-toggle" type="button"
+                                        id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Book Details
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                        <li><a class="dropdown-item"  name="fullname" hidden>Title</a></li>
+                                        <li><a class="dropdown-item" href="#" >Book Title</a></li>
+                                        <li><a class="dropdown-item" href="#">Author Name</a></li>
+                                        <li><a class="dropdown-item" href="#" >Subject</a></li>
+                                        <li><a class="dropdown-item" href="#" >Department</a></li>
+                                        <li><a class="dropdown-item" href="#">Edition</a></li>
+                                    </ul> -->
+                                    <select name="title" style="width: 120px; height: 50px;">
+                                        <option hidden>choose book</option>
+                                        <option >Book Title</option>
+                                        <option >Author name</option>
+                                        <option>Department</option>
+                                        <option >Publisher</option>
+                                        <option >Edition</option>
+                                        
+                                      </select>
+                                </div>
+                                <input type="text" class="form-control" name="search"
+                                    aria-label="Search input with dropdown button">
+                                <div class="input-group-append">
+                                    <button class="btn-lg btn-success" type="submit">
+                                        <i class="fa fa-search">&nbsp; </i> Search &nbsp;</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Navbar & Hero End -->
+
+
+        <!-- dashboard -->
+        <!-- <div class="container mt-1 mb-5">
+            
+
+        </div> -->
+
+        <!-- dashboard end -->
+
+        <!-- book  Details -->
+        <div class="container py-6">
+           
+           
+            <div class="container ">
+                <div class="mx-auto text-center wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+                    <div class="d-inline-block border rounded-pill text-primary px-4 mb-3">Books</div>
+                    <h2 class="mb-5">View All Books Details</h2>
+                </div>
+
+                <div class="row g-4 ">
+                    {% for i in d1 %}
+                    <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="team-item" style='height:500px'>
+                            <h5>{{i.booktitle}}</h5>
+                            <p class="mb-4">{{i.authorname}}</p>
+                            <img class="img-fluid rounded-circle w-100 mb-4" src="media/{{i.bookphoto}}" alt=""
+                                style="width: 200px; height: 200px;">
+                            <div class="d-flex justify-content-center">
+                                <a class="btn btn-lg-square text-primary bg-white m-1"
+                                    href="student-view-book/{{i.book_id}}"><i class="fa fa-eye"></i></a>
+                            </div>
+                        </div>
+
+                    </div>
+                    {% endfor %}
+
+                </div>
+                <br><br>
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination ml-2">
+                        {% if d1.has_previous %}
+                            <li class="page-item"><a class="page-link" href="?page=1">&laquo; First</a></li>
+                            <li class="page-item"><a class="page-link bg-info text-white" href="?page={{ d1.previous_page_number }}">Previous</a></li>
+                        {% endif %}
+                        {% if d1.has_next %}
+                        <li class="page-item"><a class="page-link bg-info text-white" href="?page={{ d1.next_page_number }}">Next</a></li>
+                        <li class="page-item"><a class="page-link" href="?page={{ r.paginator.num_pages }}">Last &raquo;</a></li>
+                        {% endif %}
+                    </ul>
+                    Page {{ d1.number }} of {{ d1.paginator.num_pages }}.
+                  </nav>
+
+            </div>
+            
+           
+
+        </div>
+        <!-- Team End -->
+
+        <!-- Footer Start -->
+        <div class="container-fluid bg-dark text-light  pt-5  wow fadeIn" data-wow-delay="0.1s"
+            style="margin-top: 6rem;">
+            <div class="container">
+                <div class="copyright">
+                    <div class="row text-center">
+                        <div class="col-md-12 text-center ">
+                            &copy; Copyright © 2022 <a class="border-bottom text-primary" href="#">Web Based College
+                                Library
+                                Management System</a>, All Right Reserved. <br>
+                            Web Designed By <a class="border-bottom text-primary"
+                                href="https://codebook.in/">Codebook.in</a> <br><br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End -->
+
+
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+    </div>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'student/lib/wow/wow.min.js' %}"></script>
+    <script src="{% static 'student/lib/easing/easing.min.js' %}"></script>
+    <script src="{% static 'student/lib/waypoints/waypoints.min.js' %}"></script>
+    <script src="{% static 'student/lib/owlcarousel/owl.carousel.min.js' %}"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="{% static 'student/js/main.js' %}"></script>
+    {% if messages %}              
+    {% for message in messages %}
+    {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+        <script>swal({
+        title: "Success!",
+        text: "{{message}}",
+        icon: "success",
+        button: "OK",
+        });
+        </script>
+        
+        {% elif message.level == DEFAULT_MESSAGE_LEVELS.WARNING %}
+            <script>swal({
+            title: "Warning :)",
+            text: "{{message}}",
+            icon: "warning",
+            button: "OK",
+            });
+        </script>
+        {% elif message.level == DEFAULT_MESSAGE_LEVELS.INFO %}
+        <script>swal({
+        title: "error :)",
+        text: "{{message}}",
+        icon: "error",
+        button: "OK",
+        });
+    </script>
+    {% elif message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+        <script>swal({
+        title: "error :)",
+        text: "{{message}}",
+        icon: "error",
+        button: "OK",
+        });
+    </script>
+        {% endif %}              
+    {% endfor %} 
+    {% endif %}
+
+    <!-- js validations -->
+    <script type="text/javascript">
+        function loginvalidation() {
+            var Booktitle = document.myform.title
+            // var Authorname = document.myform.author
+            // var Department = document.myform.department
+            // var Publisher = document.myform.publisher
+            // var Edition = document.myform.edition
+
+
+            if (Booktitle.value == "choose book") {
+                alert("Please select Book Type:");
+                Booktitle.focus();
+                return false;
+            }
+            // if (Authorname.value == "booktitle") {
+            //     alert("Please select :");
+            //     Authorname.focus();
+            //     return false;
+            // }
+            // if (Department.value == "booktitle") {
+            //     alert("Please select :");
+            //     Department.focus();
+            //     return false;
+            // }
+            // if (Publisher.value == "booktitle") {
+            //     alert("Please select :");
+            //     Publisher.focus();
+            //     return false;
+            // }
+            // if (Edition.value == "booktitle") {
+            //     alert("Please select :");
+            //     Edition.focus();
+            //     return false;
+            // }
+            
+            return true;
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,275 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Librarian Account</title>
+  <!-- base:css -->
+  <link rel="stylesheet" href="{% static 'librarian/vendors/mdi/css/materialdesignicons.min.css' %}">
+  <link rel="stylesheet" href="{% static 'librarian/vendors/feather/feather.css' %}">
+  <link rel="stylesheet" href="{% static 'librarian/vendors/base/vendor.bundle.base.css' %}">
+  <!-- endinject -->
+  <!-- plugin css for this page -->
+  <link rel="stylesheet" href="{% static 'librarian/vendors/flag-icon-css/css/flag-icon.min.css' %}" />
+  <link rel="stylesheet" href="{% static 'librarian/vendors/font-awesome/css/font-awesome.min.css' %}">
+  <link rel="stylesheet" href="{% static 'librarian/vendors/jquery-bar-rating/fontawesome-stars-o.css' %}">
+  <link rel="stylesheet" href="{% static 'librarian/vendors/jquery-bar-rating/fontawesome-stars.css' %}">
+  <!-- End plugin css for this page -->
+  <!-- inject:css -->
+  <link rel="stylesheet" href="{% static 'librarian/css/style.css' %}">
+  <!-- endinject -->
+  <link rel="shortcut icon" href="{% static 'librarian/images/favicon.png' %}" />
+  <!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> -->
+
+
+</head>
+
+<body>
+  <div class="container-scroller">
+    <!-- partial:partials/_navbar.html -->
+    <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+      <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+        <a class="navbar-brand brand-logo" style="color: white; background-image: white;" href="{% url 'lib-home' %}">
+          <img src="{% static 'librarian/images/icons8-library-building-50.png' %}"
+            style="width: 40px; height: 40px; margin-right: 2px; color: white;">LIBRARY</a>
+        <a class="navbar-brand brand-logo-mini" href="{% url 'lib-home' %}">
+          <img src="{% static 'librarian/images/logo-mini.svg' %}" alt="logo" /></a>
+      </div>
+      <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
+        <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+          <span class="icon-menu"></span>
+        </button>
+        <ul class="navbar-nav mr-lg-2">
+          <li class="nav-item nav-search d-none d-lg-block">
+            <!-- <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="search">
+                  <i class="icon-search"></i>
+                </span>
+              </div>
+              <input type="text" class="form-control" placeholder="Search Projects.." aria-label="search"
+                aria-describedby="search">
+            </div> -->
+          </li>
+        </ul>
+        <ul class="navbar-nav navbar-nav-right">
+
+          <li class="nav-item dropdown d-flex mr-4 ">
+            <a class="nav-link count-indicator dropdown-toggle d-flex align-items-center justify-content-center"
+              id="notificationDropdown" href="#" data-toggle="dropdown">
+              <i class="icon-cog"></i>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
+              aria-labelledby="notificationDropdown">
+              <p class="mb-0 font-weight-normal float-left dropdown-header">Settings</p>
+              <a class="dropdown-item preview-item" href="{% url 'lib-profile' %}">
+                <i class="icon-head"></i> Profile
+              </a>
+              <a class="dropdown-item preview-item" href="{% url 'main-librarian-login' %}">
+                <i class="icon-inbox"></i> Logout
+              </a>
+            </div>
+          </li>
+
+        </ul>
+        <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
+          data-toggle="offcanvas">
+          <span class="icon-menu"></span>
+        </button>
+      </div>
+    </nav>
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+      <!-- partial:partials/_sidebar.html -->
+      <nav class="sidebar sidebar-offcanvas" id="sidebar">
+        {% for i in profile %}
+      <div class="user-profile">
+        <div class="user-image">
+          <img src="/media/{{i.librarian_photo}}">
+        </div>
+        {% endfor %}
+        <div class="user-name">
+          Librarian
+        </div>
+        <!-- <div class="user-designation">
+            Developer
+        </div> -->
+      </div>
+      <ul class="nav">
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'lib-home' %}">
+            <i class="icon-box menu-icon"></i>
+            <span class="menu-title">Home</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+            <i class="icon-book menu-icon"></i>
+            <span class="menu-title">Book Management</span>
+            <i class="menu-arrow"></i>
+          </a>
+          <div class="collapse" id="ui-basic">
+            <ul class="nav flex-column sub-menu">
+              <li class="nav-item"> <a class="nav-link" href="{% url 'lib-add-book' %}">Add Books</a></li>
+              <li class="nav-item"> <a class="nav-link" href="{% url 'lib-search' %}">Search Panel</a></li>
+              <li class="nav-item"> <a class="nav-link" href="{% url 'lib-issue-book' %}">Request Panel</a></li>
+              <li class="nav-item"> <a class="nav-link" href="{% url 'lib-return-book' %}">Issue Panel</a></li>
+
+
+              <!-- <li class="nav-item"> <a class="nav-link" href="{% url 'lib-issued-book' %}">View Issued & Returned 
+                  Books</a></li>-->
+
+            </ul>
+          </div>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'lib-sentiment' %}">
+            <i class="icon-help menu-icon"></i>
+            <span class="menu-title">Sentiment Analysis</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'lib-feedback' %}">
+            <i class="icon-air-play menu-icon"></i>
+            <span class="menu-title">FeedBack</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+      <!-- partial -->
+      <div class="main-panel">
+        <div class="content-wrapper">
+          <div class="row">
+            <div class="col-sm-12 mb-4 mb-xl-0">
+              <h4 class="font-weight-bold text-dark text-center">Students FeedBack</h4>
+            </div>
+          </div>
+          <div class="row mt-3 mb-5">
+            {% for i in data %}
+            <div class="col-12 col-md-4 justify-content-center mb-4 mb-xl-0 text-center">
+              <div class="card ">
+                <img src="/media/{{i.student_id.student_photo}}" class="rounded-pill mt-2"
+                  style="width: 50px; height: 50px; margin:0 auto ; display:block;">
+                <h6 class="text-center text-danger mt-2" style="font-size: large; font-weight: bold;">
+                  {{i.student_id.student_fullname}}</h6>
+                <h6 class="ext-center" style="font-size: large; color: blue;">{{i.student_id.student_branch}}</h6> <br>
+                <p class="font-weight-normal mb-2 text-muted"
+                  style="font-size: 15px; font-weight: bolder; color:black;">
+                  {{i.text}}
+                </p>
+
+                <!-- <p>{{i.rating3}}</p> -->
+                <div class="row">
+                  <div class="col-4"></div>
+                  <div class="col-4">
+                    <td>   
+                      {% if i.sentiment == 'Very Positive' %} <img src="{% static 'librarian/images/love.jpg' %}" style="width: 30px; height: 30px;" /> {% endif %}
+                      {% if i.sentiment == 'Very Negitive' %} <img src="{% static 'librarian/images/angry.jpg' %}" style="width: 30px; height: 30px;" /> {% endif %}
+                      {% if i.sentiment == 'Positive' %} <img src="{% static 'librarian/images/smile.jpg' %}" style="width: 30px; height: 30px;" /> {% endif %}
+                      {% if i.sentiment == 'Negitive' %} <img src="{% static 'librarian/images/sad.jpg' %}"  style="width: 30px; height: 30px;"/> {% endif %}
+                      {% if i.sentiment == 'Neutral' %}  <img src="{% static 'librarian/images/confused.jpg' %}"  style="width: 30px; height: 30px;"/> {% endif %}     
+                  </td>
+                  </div>
+                  <div class="col-4"></div>
+                </div>
+                
+                  <div class="col-12">
+                    
+                      {% if i.rating3 == '1' %}
+                      <div class="d-flex justify-content-center">
+                        <i class="fa fa-star" style="color:gold; font-size:20px"></i>
+                        <i class="fa fa-star-o" style="color:gold; font-size:20px"></i>
+                        <i class="fa fa-star-o" style="color:gold; font-size:20px"></i>
+                        <i class="fa fa-star-o" style="color:gold; font-size:20px"></i>
+                        <i class="fa fa-star-o" style="color:gold; font-size:20px"></i>
+                      </div>
+                      {% elif i.rating3 == '2' %}
+                      <div class="d-flex justify-content-center">
+                        <i class="fa fa-star" style="color:gold; font-size:20px"></i>
+                        <i class="fa fa-star" style="color:gold; font-size:20px"></i>
+                        <i class="fa fa-star-o" style="color:gold; font-size:20px"></i>
+                        <i class="fa fa-star-o" style="color:gold; font-size:20px"></i>
+                        <i class="fa fa-star-o" style="color:gold; font-size:20px"></i>
+                      </div>
+                      {% elif i.rating3 == '3' %}
+                      <div class="d-flex justify-content-center">
+                        <i class="fa fa-star" style="color:gold; font-size:20px"></i>
+                        <i class="fa fa-star" style="color:gold; font-size:20px"></i>
+                        <i class="fa fa-star" style="color:gold; font-size:20px"></i>
+                        <i class="fa fa-star-o" style="color:gold; font-size:20px"></i>
+                        <i class="fa fa-star-o" style="color:gold; font-size:20px"></i>
+                      </div>
+                      {% elif i.rating3 == '4' %}
+                      <div class="d-flex justify-content-center">
+                        <i class="fa fa-star" style="color:gold; font-size:20px"></i>
+                        <i class="fa fa-star" style="color:gold; font-size:20px"></i>
+                        <i class="fa fa-star" style="color:gold; font-size:20px"></i>
+                        <i class="fa fa-star" style="color:gold; font-size:20px"></i>
+                        <i class="fa fa-star-o" style="color:gold; font-size:20px"></i>
+                      </div>
+                      {% elif i.rating3 == '5' %}
+                      <div class="d-flex justify-content-center">
+                        <i class="fa fa-star" style="color:gold; font-size:20px"></i>
+                        <i class="fa fa-star" style="color:gold; font-size:20px"></i>
+                        <i class="fa fa-star" style="color:gold; font-size:20px"></i>
+                        <i class="fa fa-star" style="color:gold; font-size:20px"></i>
+                        <i class="fa fa-star" style="color:gold; font-size:20px"></i>
+                      </div>
+                      {% endif%}
+                    
+                  </div>
+              </div>
+              <br>
+            </div>
+            {% endfor %}
+          </div>
+
+
+        </div>
+        <!-- content-wrapper ends -->
+        <!-- partial:partials/_footer.html -->
+        <footer class="footer">
+          <div class="d-sm-flex justify-content-center justify-content-sm-between">
+            <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © Web Based College
+              Library Management System
+              2020</span>
+
+          </div>
+          <span class="text-muted d-block text-center text-sm-left d-sm-inline-block mt-2">Designed By <a
+              href="https://codebook.in/" target="_blank">CodeBook.in</a></span>
+        </footer>
+
+        <!-- partial -->
+      </div>
+      <!-- main-panel ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+  </div>
+  <!-- container-scroller -->
+
+  <!-- base:js -->
+  <script src="{% static 'librarian/vendors/base/vendor.bundle.base.js' %} "></script>
+  <!-- endinject -->
+  <!-- Plugin js for this page-->
+  <!-- End plugin js for this page-->
+  <!-- inject:js -->
+  <script src="{% static 'librarian/js/off-canvas.js' %} "></script>
+  <script src="{% static 'librarian/js/hoverable-collapse.js' %} "></script>
+  <script src="{% static 'librarian/js/template.js' %} "></script>
+  <!-- endinject -->
+  <!-- plugin js for this page -->
+  <script src="{% static 'librarian/vendors/chart.js/Chart.min.js' %} "></script>
+  <script src="{% static 'librarian/vendors/jquery-bar-rating/jquery.barrating.min.js' %} "></script>
+  <!-- End plugin js for this page -->
+  <!-- Custom js for this page-->
+  <script src="{% static 'librarian/js/dashboard.js' %} "></script>
+  <!-- End custom js for this page-->
+
+
+</body>
+
+</html>

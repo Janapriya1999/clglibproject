@@ -1,0 +1,411 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Admin Account</title>
+    <!-- base:css -->
+    <link rel="stylesheet" href="{% static 'admin/vendors/mdi/css/materialdesignicons.min.css' %} ">
+    <link rel="stylesheet" href="{% static 'admin/vendors/feather/feather.css' %} ">
+    <link rel="stylesheet" href="{% static 'admin/vendors/base/vendor.bundle.base.css' %} ">
+    <!-- endinject -->
+    <!-- plugin css for this page -->
+    <link rel="stylesheet" href="{% static 'admin/vendors/flag-icon-css/css/flag-icon.min.css' %} " />
+    <link rel="stylesheet" href="{% static 'admin/vendors/font-awesome/css/font-awesome.min.css' %} ">
+    <link rel="stylesheet" href="{% static 'admin/vendors/jquery-bar-rating/fontawesome-stars-o.css' %} ">
+    <link rel="stylesheet" href="{% static 'admin/vendors/jquery-bar-rating/fontawesome-stars.css' %} ">
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <link rel="stylesheet" href="{% static 'admin/css/style.css' %} ">
+    <!-- endinject -->
+    <link rel="shortcut icon" href="{% static 'admin/images/favicon.png' %} " />
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+</head>
+
+<body>
+    <div class="container-scroller">
+        <!-- partial:partials/_navbar.html -->
+        <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+            <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+                <a class="navbar-brand brand-logo" style="color: white; background-image: white;"
+                    href="{% url 'adm-dashboard' %}">
+                    <img src="{% static 'admin/images/icons8-library-building-50.png' %}"
+                        style="width: 40px; height: 40px; margin-right: 2px; color: white;">LIBRARY</a>
+                <a class="navbar-brand brand-logo-mini" href="{% url 'adm-add-librarian' %}">
+                    <img src="{% static 'admin/images/logo-mini.svg' %}" alt="logo" /></a>
+            </div>
+            <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
+                <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+                    <span class="icon-menu"></span>
+                </button>
+                <ul class="navbar-nav mr-lg-2">
+                    <li class="nav-item nav-search d-none d-lg-block">
+                        <!-- <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="search">
+                                    <i class="icon-search"></i>
+                                </span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Search Projects.." aria-label="search"
+                                aria-describedby="search">
+                        </div> -->
+                    </li>
+                </ul>
+                <ul class="navbar-nav navbar-nav-right">
+                    <li class="nav-item dropdown d-flex mr-4 ">
+                        <a class="nav-link count-indicator dropdown-toggle d-flex align-items-center justify-content-center"
+                            id="notificationDropdown" href="#" data-toggle="dropdown">
+                            <i class="icon-cog"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
+                            aria-labelledby="notificationDropdown">
+                            <p class="mb-0 font-weight-normal float-left dropdown-header">Settings</p>
+                            <!-- <a class="dropdown-item preview-item">
+                      <i class="icon-head"></i> Profile
+                    </a> -->
+                            <a class="dropdown-item preview-item" href="{% url 'main-admin-login' %}">
+                                <i class="icon-inbox"></i> Logout
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+                <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
+                    data-toggle="offcanvas">
+                    <span class="icon-menu"></span>
+                </button>
+            </div>
+        </nav>
+        <!-- partial -->
+        <div class="container-fluid page-body-wrapper">
+            <!-- partial:partials/_sidebar.html -->
+            <nav class="sidebar sidebar-offcanvas" id="sidebar">
+                <div class="user-profile">
+                    <div class="user-image">
+                        <img src="{% static 'admin/images/faces/face1.jpg' %}">
+                    </div>
+                    <div class="user-name">
+                        Admin
+                    </div>
+                </div>
+                <ul class="nav">
+                    <!-- home start -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'adm-dashboard' %}">
+                            <i class="icon-box menu-icon"></i>
+                            <span class="menu-title">Home</span>
+                        </a>
+                    </li>
+                    <!-- home end -->
+
+                    <!-- librarian start -->
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false"
+                            aria-controls="ui-basic">
+                            <i class="icon-head menu-icon"></i>
+                            <span class="menu-title">Library</span>
+                            <i class="menu-arrow"></i>
+                        </a>
+
+                        <div class="collapse" id="ui-basic">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item"> <a class="nav-link" href="{% url 'adm-add-librarian' %} ">Add
+                                        Librarian</a></li>
+                                <li class="nav-item"> <a class="nav-link"
+                                        href="{% url 'adm-manage-librarian' %} ">Management Librarian</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <!-- librarian end -->
+
+                    <!-- student start -->
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="collapse" href="#std" aria-expanded="false"
+                            aria-controls="ui-basic">
+                            <i class="icon-head menu-icon"></i>
+                            <span class="menu-title">Student</span>
+                            <i class="menu-arrow"></i>
+                        </a>
+
+                        <div class="collapse" id="std">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item"> <a class="nav-link" href="{% url 'adm-manage-std' %}">Manage
+                                        Student</a></li>
+                                <li class="nav-item"> <a class="nav-link" href="{% url 'adm-view-std' %}">View
+                                        Students</a></li>
+
+                            </ul>
+                        </div>
+                    </li>
+                    <!-- student end -->
+
+                    <!-- View start -->
+                    <!-- <li class="nav-item">
+                        <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
+                            <i class="icon-book menu-icon"></i>
+                            <span class="menu-title">View Books</span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                        <div class="collapse" id="auth">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item"> <a class="nav-link" href="{% url 'adm-search-book' %}">Search Books</a></li>
+                                <li class="nav-item"> <a class="nav-link" href="{% url 'adm-view-std-rece-book' %}">View Std Received Books</a></li>
+                                <li class="nav-item"> <a class="nav-link" href="{% url 'adm-view-return' %}">View Std Returned Books</a></li>
+                                <li class="nav-item"> <a class="nav-link" href="{% url 'adm-view-all-book' %}">View All Books</a></li>
+                                <li class="nav-item"> <a class="nav-link" href="{% url 'adm-manage-book' %}">Manage Books</a></li>
+                            </ul>
+                        </div>
+                    </li> -->
+                    <!-- View end -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'adm-sentiment' %}">
+                            <i class="icon-help menu-icon"></i>
+                            <span class="menu-title">Sentiment Analysis</span>
+                        </a>
+                    </li>
+                    <!-- feedback start -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'adm-feedback' %}">
+                            <i class="icon-air-play menu-icon"></i>
+                            <span class="menu-title">feedback</span>
+                        </a>
+                    </li>
+                    <!-- feedback end -->
+                </ul>
+            </nav>
+            <!-- partial -->
+
+            <!-- mainpanel starts -->
+            <div class="main-panel">
+                <div class="content-wrapper">
+                    <div class="row">
+                        <div class="col-sm-12 mb-4 mb-xl-0">
+                          <h4 class="font-weight-bold text-dark text-center">Sentiment Analysis</h4><br>
+                        </div>
+                      </div>
+                    
+                    <div class="row">
+                        <div class="col-lg-12 grid-margin stretch-card">
+                          <div class="card">
+                            <div class="card-body">
+                              <div class="table-responsive">
+                                <table class="table table-hover">
+                                  <thead>
+                                    <tr class="font-weight-bold text-dark">
+                                      <th>PROFILE</th>
+                                      <th>STD ID</th>
+                                       <th>STD NAME</th>
+                                      <!--<th>STD BRANCH</th>    
+                                      <th>STD YEAR</th>
+                                      <th>STD EMAIL</th>  -->
+                                      <th>FEEDBACK</th>
+                                      <th>RATING</th>
+                                      <th>EXPRESSION</th>
+                                      <th>SENTIMENT</th>
+                                      
+                                      
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    {% for i in data %}
+            
+                                    <tr>
+                                      
+                                      <td> <img src="/media/{{i.student_id.student_photo}}" alt="">  </td>
+                                      <td>{{i.student_id.student_id}}</td>
+                                       <td>{{i.student_id.student_fullname}}</td>
+                                      <!--<td>{{i.student_id.student_branch}}</td>
+                                      <td>{{i.student_id.student_year}}</td>
+                                      <th>{{i.student_id.student_email}}</th> -->
+                                      
+                                      <td>{{i.text}}</td>
+                                      
+                                      <td>
+                                      <h3>
+                                        {% if i.rating3 == '1' %}
+                                        <div class="d-flex">
+                                          <i class="fa fa-star" style="color:gold; font-size:20px"></i>
+                                          <i class="fa fa-star-o" style="color:gold; font-size:20px"></i>
+                                          <i class="fa fa-star-o" style="color:gold; font-size:20px"></i>
+                                          <i class="fa fa-star-o" style="color:gold; font-size:20px"></i>
+                                          <i class="fa fa-star-o" style="color:gold; font-size:20px"></i>
+                                        </div>
+                                        {% elif i.rating3 == '2' %}
+                                        <div class="d-flex">
+                                          <i class="fa fa-star" style="color:gold; font-size:20px"></i>
+                                          <i class="fa fa-star" style="color:gold; font-size:20px"></i>
+                                          <i class="fa fa-star-o" style="color:gold; font-size:20px"></i>
+                                          <i class="fa fa-star-o" style="color:gold; font-size:20px"></i>
+                                          <i class="fa fa-star-o" style="color:gold; font-size:20px"></i>
+                                        </div>
+                                        {% elif i.rating3 == '3' %}
+                                        <div class="d-flex">
+                                          <i class="fa fa-star" style="color:gold; font-size:20px"></i>
+                                          <i class="fa fa-star" style="color:gold; font-size:20px"></i>
+                                          <i class="fa fa-star" style="color:gold; font-size:20px"></i>
+                                          <i class="fa fa-star-o" style="color:gold; font-size:20px"></i>
+                                          <i class="fa fa-star-o" style="color:gold; font-size:20px"></i>
+                                        </div>
+                                        {% elif i.rating3 == '4' %}
+                                        <div class="d-flex">
+                                          <i class="fa fa-star" style="color:gold; font-size:20px"></i>
+                                          <i class="fa fa-star" style="color:gold; font-size:20px"></i>
+                                          <i class="fa fa-star" style="color:gold; font-size:20px"></i>
+                                          <i class="fa fa-star" style="color:gold; font-size:20px"></i>
+                                          <i class="fa fa-star-o" style="color:gold; font-size:20px"></i>
+                                        </div>
+                                        {% elif i.rating3 == '5' %}
+                                        <div class="d-flex">
+                                          <i class="fa fa-star" style="color:gold; font-size:20px"></i>
+                                          <i class="fa fa-star" style="color:gold; font-size:20px"></i>
+                                          <i class="fa fa-star" style="color:gold; font-size:20px"></i>
+                                          <i class="fa fa-star" style="color:gold; font-size:20px"></i>
+                                          <i class="fa fa-star" style="color:gold; font-size:20px"></i>
+                                        </div>
+                                        {% endif%}
+                                      </h3>
+                                      </td>
+                                      <td>{{i.sentiment}}</td>
+                                      <td>   
+                                          {% if i.sentiment == 'Very Positive' %} <img src="{% static 'librarian/images/love.jpg' %}"  /> {% endif %}
+                                          {% if i.sentiment == 'Very Negitive' %} <img src="{% static 'librarian/images/angry.jpg' %}"  /> {% endif %}
+                                          {% if i.sentiment == 'Positive' %} <img src="{% static 'librarian/images/smile.jpg' %}"  /> {% endif %}
+                                          {% if i.sentiment == 'Negitive' %} <img src="{% static 'librarian/images/sad.jpg' %}"  /> {% endif %}
+                                          {% if i.sentiment == 'Neutral' %}  <img src="{% static 'librarian/images/confused.jpg' %}"  /> {% endif %}
+                                              
+                                      </td>
+                                      <!-- <td><a href="accepted-book/{{i.view_id}}" type="button" class="btn btn-success btn-xs " >Accept</a>&nbsp;&nbsp;
+                                        <a href="declined-book/{{i.view_id}}" type="button" class="btn btn-danger btn-xs " >Decline</a></td>
+                                      <td><label class="badge badge-primary font-weight-bold text-black" style="font-size: 12px;">{{i.librarian_status}}</label></td>
+                                      
+                                      <td><a href="accepted-return/{{i.return_status}}}" type="button" class="btn btn-warning btn-xs">Accept Return Request</a></td>
+                                      <td><label class="badge btn-info">{{i.return_book_status}}</label></td> -->
+                                    </tr>
+                                    {% endfor %}
+                                  </tbody>
+                                  
+                                  <!-- <div>
+                                    page {{page_obj.number}} of {{page_obj.pagination.num_pages}}
+                                  </div>
+            
+                                  <ul style="margin-left: 10px;" class="pagination">
+                                    {% if page_obj.has_previous %}
+                                    <li><a href="?page=1"> &laquo; First</a></li>
+                                    <li><a href="?page={{ page_obj.previous_page_number }}">Pevious</a></li>
+                                    {% endif %}
+            
+                                    {% if page_obj.has_next %}
+                                    <li><a href="?page={{ page_obj.next_page_number }}"></a></li>
+                                    <li><a href="?page={{ page_obj.paginator.num_pages }}"></a></li>
+                                    {% endif %}
+            
+                                  </ul> -->
+                                </table>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <nav aria-label="Page navigation example">
+                        <ul class="pagination ml-2">
+                            {% if data.has_previous %}
+                                <!-- <li class="page-item"><a class="page-link" href="?page=1">&laquo; First</a></li> -->
+                                <li class="page-item"><a class="page-link bg-info text-white" href="?page={{ data.previous_page_number }}">Previous</a></li>
+                            {% endif %}
+                            {% if data.has_next %}
+                            <li class="page-item"><a class="page-link bg-info text-white" href="?page={{ data.next_page_number }}">Next</a></li>
+                            <!-- <li class="page-item"><a class="page-link" href="?page={{ r.paginator.num_pages }}">Last &raquo;</a></li> -->
+                            {% endif %}
+                        </ul>
+                        Page {{ data.number }} of {{ data.paginator.num_pages }}.
+                      </nav>
+                    
+
+                </div>
+                <!-- content-wrapper ends -->
+                <!-- partial:partials/_footer.html -->
+                <footer class="footer">
+                    <div class="d-sm-flex justify-content-center justify-content-sm-between">
+                        <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © Web
+                            Based College Library Management System
+                            2020</span>
+                        <!-- <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Free <a
+                          href="https://www.bootstrapdash.com/" target="_blank">Bootstrap dashboard templates</a> from
+                        Bootstrapdash.com</span> -->
+                    </div>
+                    <span class="text-muted d-block text-center text-sm-left d-sm-inline-block mt-2">Designed By <a
+                            href="https://codebook.in/" target="_blank">CodeBook.in</a></span>
+                </footer>
+
+                <!-- partial -->
+
+            </div>
+            <!-- main-panel ends -->
+        </div>
+        <!-- page-body-wrapper ends -->
+    </div>
+    <!-- container-scroller -->
+    {% if messages %}
+    {% for message in messages %}
+    {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+    <script>swal({
+            title: "Login Success!",
+            text: "{{message}}",
+            icon: "success",
+            button: "OK",
+        });
+    </script>
+
+    {% elif message.level == DEFAULT_MESSAGE_LEVELS.WARNING %}
+    <script>swal({
+            title: "Warning :)",
+            text: "{{message}}",
+            icon: "warning",
+            button: "OK",
+        });
+    </script>
+    {% elif message.level == DEFAULT_MESSAGE_LEVELS.INFO %}
+    <script>swal({
+            title: "error :)",
+            text: "{{message}}",
+            icon: "error",
+            button: "OK",
+        });
+    </script>
+    {% elif message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+    <script>swal({
+            title: "error :)",
+            text: "{{message}}",
+            icon: "error",
+            button: "OK",
+        });
+    </script>
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+    <!-- base:js -->
+    <script src="{% static 'admin/vendors/base/vendor.bundle.base.js' %} "></script>
+    <!-- endinject -->
+    <!-- Plugin js for this page-->
+    <!-- End plugin js for this page-->
+    <!-- inject:js -->
+    <script src="{% static 'admin/js/off-canvas.js' %} "></script>
+    <script src="{% static 'admin/js/hoverable-collapse.js' %} "></script>
+    <script src="{% static 'admin/js/template.js' %} "></script>
+    <!-- endinject -->
+    <!-- plugin js for this page -->
+    <script src="{% static 'admin/vendors/chart.js/Chart.min.js' %} "></script>
+    <script src="{% static 'admin/vendors/jquery-bar-rating/jquery.barrating.min.js' %} "></script>
+    <!-- End plugin js for this page -->
+    <!-- Custom js for this page-->
+    <script src="{% static 'admin/js/dashboard.js' %} "></script>
+    <!-- End custom js for this page-->
+
+    
+</body>
+
+</html>
